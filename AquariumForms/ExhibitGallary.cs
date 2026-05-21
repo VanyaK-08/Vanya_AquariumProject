@@ -10,16 +10,11 @@ using System.Windows.Forms;
 
 namespace AquariumForms
 {
-    public partial class RegisterForm : Form
+    public partial class ExhibitGallary : Form
     {
-        public RegisterForm()
+        public ExhibitGallary()
         {
             InitializeComponent();
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

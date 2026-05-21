@@ -1,4 +1,5 @@
-﻿namespace AquariumForms
+﻿
+namespace AquariumForms
 {
     partial class LoginForm
     {
