@@ -13,5 +13,9 @@
         public int TankId { get; set; }
 
         public Tank? Tank { get; set; }
+        public override string ToString()
+        {
+            return $"{Name}({Species}) - Arrival: {ArrivalDate:dd.MM.yyyy} | Tank: {Tank.Name}";
+        }
     }
 }

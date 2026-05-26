@@ -21,5 +21,10 @@ namespace AquariumData.Entities
         public Exhibit? Exhibit { get; set; }
 
         public ICollection<Animal> Animals { get; set; } = new List<Animal>();
+
+        public override string ToString()
+        {
+            return $"{Name}, {Exhibit.Title}";
+        }
     }
 }

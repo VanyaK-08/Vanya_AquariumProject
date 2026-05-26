@@ -9,7 +9,7 @@ namespace AquariumController
         AquariumContext context = new AquariumContext();
         public async Task<List<Animal>> GetAllAnimals()
         {
-            return await context.Animals.ToListAsync();
+            return await context.Animals.Include(a=>a.Tank).ToListAsync();
         }
 
         public async Task AddAnimal(Animal animal)

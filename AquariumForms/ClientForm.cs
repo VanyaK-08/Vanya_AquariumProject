@@ -44,7 +44,7 @@ namespace AquariumForms
             this.Show();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private async void button1_Click(object sender, EventArgs e)
         {
             this.Hide();
             if (listBox1.SelectedIndex != -1)
@@ -57,7 +57,7 @@ namespace AquariumForms
                     int index = listBox1.SelectedIndex;
                     Ticket ticket = (Ticket)listBox1.Items[index];
                     TicketController controller = new TicketController();
-                    controller.UnbookTicketClient(ticket);
+                    await controller.UnbookTicketClient(ticket);
                     listBox1.Items.RemoveAt(index);
                     MessageBox.Show("Ticket unbooked successfully.");
                 }

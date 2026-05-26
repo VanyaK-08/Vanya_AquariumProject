@@ -47,9 +47,9 @@
             label3.BackColor = Color.Transparent;
             label3.Font = new Font("Sans Serif Collection", 10.1999989F, FontStyle.Bold);
             label3.ForeColor = SystemColors.ButtonHighlight;
-            label3.Location = new Point(113, 83);
+            label3.Location = new Point(99, 62);
             label3.Name = "label3";
-            label3.Size = new Size(63, 58);
+            label3.Size = new Size(54, 48);
             label3.TabIndex = 4;
             label3.Text = "Title";
             // 
@@ -59,9 +59,9 @@
             label1.BackColor = Color.Transparent;
             label1.Font = new Font("Sans Serif Collection", 10.1999989F, FontStyle.Bold);
             label1.ForeColor = SystemColors.ButtonHighlight;
-            label1.Location = new Point(113, 126);
+            label1.Location = new Point(99, 94);
             label1.Name = "label1";
-            label1.Size = new Size(86, 58);
+            label1.Size = new Size(71, 48);
             label1.TabIndex = 5;
             label1.Text = "Theme";
             // 
@@ -71,32 +71,35 @@
             label2.BackColor = Color.Transparent;
             label2.Font = new Font("Sans Serif Collection", 10.1999989F, FontStyle.Bold);
             label2.ForeColor = SystemColors.ButtonHighlight;
-            label2.Location = new Point(113, 184);
+            label2.Location = new Point(99, 138);
             label2.Name = "label2";
-            label2.Size = new Size(126, 58);
+            label2.Size = new Size(108, 48);
             label2.TabIndex = 6;
             label2.Text = "Description";
             // 
             // textBox1
             // 
-            textBox1.Location = new Point(241, 92);
+            textBox1.Location = new Point(211, 69);
+            textBox1.Margin = new Padding(3, 2, 3, 2);
             textBox1.Name = "textBox1";
-            textBox1.Size = new Size(249, 27);
+            textBox1.Size = new Size(218, 23);
             textBox1.TabIndex = 7;
             // 
             // textBox2
             // 
-            textBox2.Location = new Point(241, 135);
+            textBox2.Location = new Point(211, 101);
+            textBox2.Margin = new Padding(3, 2, 3, 2);
             textBox2.Name = "textBox2";
-            textBox2.Size = new Size(249, 27);
+            textBox2.Size = new Size(218, 23);
             textBox2.TabIndex = 8;
             // 
             // richTextBox1
             // 
-            richTextBox1.Location = new Point(245, 184);
+            richTextBox1.Location = new Point(214, 138);
+            richTextBox1.Margin = new Padding(3, 2, 3, 2);
             richTextBox1.MaxLength = 1000;
             richTextBox1.Name = "richTextBox1";
-            richTextBox1.Size = new Size(245, 49);
+            richTextBox1.Size = new Size(215, 38);
             richTextBox1.TabIndex = 9;
             richTextBox1.Text = "";
             // 
@@ -104,9 +107,10 @@
             // 
             button1.BackColor = Color.LightSteelBlue;
             button1.Font = new Font("Sans Serif Collection", 10.1999989F, FontStyle.Bold);
-            button1.Location = new Point(113, 342);
+            button1.Location = new Point(99, 256);
+            button1.Margin = new Padding(3, 2, 3, 2);
             button1.Name = "button1";
-            button1.Size = new Size(117, 52);
+            button1.Size = new Size(102, 39);
             button1.TabIndex = 13;
             button1.Text = "Save";
             button1.UseVisualStyleBackColor = false;
@@ -116,18 +120,20 @@
             // 
             button2.BackColor = Color.LightSteelBlue;
             button2.Font = new Font("Sans Serif Collection", 10.1999989F, FontStyle.Bold);
-            button2.Location = new Point(373, 342);
+            button2.Location = new Point(326, 256);
+            button2.Margin = new Padding(3, 2, 3, 2);
             button2.Name = "button2";
-            button2.Size = new Size(117, 52);
+            button2.Size = new Size(102, 39);
             button2.TabIndex = 14;
             button2.Text = "Cancel";
             button2.UseVisualStyleBackColor = false;
             // 
             // pictureBox1
             // 
-            pictureBox1.Location = new Point(535, 83);
+            pictureBox1.Location = new Point(468, 62);
+            pictureBox1.Margin = new Padding(3, 2, 3, 2);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(217, 188);
+            pictureBox1.Size = new Size(190, 141);
             pictureBox1.TabIndex = 15;
             pictureBox1.TabStop = false;
             // 
@@ -135,20 +141,21 @@
             // 
             button3.BackColor = Color.LightSteelBlue;
             button3.Font = new Font("Sans Serif Collection", 7.799999F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            button3.Location = new Point(113, 257);
+            button3.Location = new Point(99, 193);
+            button3.Margin = new Padding(3, 2, 3, 2);
             button3.Name = "button3";
-            button3.Size = new Size(136, 34);
+            button3.Size = new Size(132, 32);
             button3.TabIndex = 16;
             button3.Text = "Choose image...";
             button3.UseVisualStyleBackColor = false;
             // 
             // AddUpdateExhibitForm
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = Properties.Resources.exhibitAddUpdForm;
             BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(700, 338);
             Controls.Add(button3);
             Controls.Add(pictureBox1);
             Controls.Add(button2);
@@ -159,6 +166,7 @@
             Controls.Add(label2);
             Controls.Add(label1);
             Controls.Add(label3);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "AddUpdateExhibitForm";
             Text = "AddExhibitForm";
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();

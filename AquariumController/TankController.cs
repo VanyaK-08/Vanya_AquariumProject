@@ -14,7 +14,7 @@ namespace AquariumController
         AquariumContext context = new AquariumContext();
         public async Task<List<Tank>> GetAllTanks()
         {
-            return await context.Tanks.ToListAsync();
+            return await context.Tanks.Include(t=>t.Exhibit).ToListAsync();
         }
 
         public async Task AddTank(Tank tank)
@@ -30,6 +30,11 @@ namespace AquariumController
             if (context.Tanks.Any(t => t.Name == tank.Name))
             {
                 throw new ArgumentException("A tank with the same name already exists.");
+            }
+            var checkExistingExhibit = await context.Tanks.Where(t => t.ExhibitId == tank.ExhibitId).ToListAsync();
+            if(checkExistingExhibit!=null)
+            {
+                throw new ArgumentException("This tank already belongs to an exhibit!");
             }
             context.Tanks.Add(tank);
             await context.SaveChangesAsync();

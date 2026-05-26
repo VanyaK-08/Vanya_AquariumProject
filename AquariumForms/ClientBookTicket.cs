@@ -14,7 +14,7 @@ namespace AquariumForms
             this.currentClient1 = currentClient;
         }
         private Userr currentClient1 { get; set; }
-        private void button1_Click(object sender, EventArgs e)
+        private async void button1_Click(object sender, EventArgs e)
         {
             Ticket ticket = (Ticket)comboBox1.SelectedItem;
             if (ticket == null)
@@ -24,7 +24,14 @@ namespace AquariumForms
             }
             TicketController controller = new TicketController();
             Userr currentClient = currentClient1;
-            controller.BookTicketClient(ticket, currentClient);
+            try
+            {
+                await controller.BookTicketClient(ticket, currentClient);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
             DialogResult = DialogResult.OK;
         }
 
