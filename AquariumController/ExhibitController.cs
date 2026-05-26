@@ -1,14 +1,49 @@
 ﻿using AquariumData;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using AquariumData.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace AquariumController
 {
     public class ExhibitController
     {
         AquariumContext context = new AquariumContext();
+        public async Task<List<Exhibit>> GetAllExhibits()
+        {
+            return await context.Exhibits.ToListAsync();
+        }
+
+        public async Task AddExhibit(Exhibit exhibit)
+        {
+            if (string.IsNullOrEmpty(exhibit.Title) || string.IsNullOrWhiteSpace(exhibit.Title))
+            {
+                throw new ArgumentException("Invalid exhibit data.");
+            }
+            if (context.Exhibits.Any(e => e.Title == exhibit.Title))
+            {
+                throw new ArgumentException("An exhibit with the same title already exists.");
+            }
+            context.Exhibits.Add(exhibit);
+            await context.SaveChangesAsync();
+        }
+
+        public async Task UpdateExhibit(Exhibit exhibit)
+        {
+            var existingExhibit = await context.Exhibits.FindAsync(exhibit.Id);
+            if (existingExhibit == null)
+            {
+                throw new ArgumentException("Exhibit with the specified ID does not exist.");
+            }
+            if (string.IsNullOrEmpty(exhibit.Title) || string.IsNullOrWhiteSpace(exhibit.Title))
+            {
+                throw new ArgumentException("Invalid exhibit data.");
+            }
+            if (context.Exhibits.Any(e => e.Id != exhibit.Id && e.Title == exhibit.Title))
+            {
+                throw new ArgumentException("Another exhibit with the same title already exists.");
+            }
+            existingExhibit.Title = exhibit.Title;
+            existingExhibit.Description = exhibit.Description;
+            await context.SaveChangesAsync();
+        }
     }
 }

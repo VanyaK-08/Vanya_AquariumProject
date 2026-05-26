@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AquariumData.Migrations
 {
     [DbContext(typeof(AquariumContext))]
-    [Migration("20260519104713_CreateDB")]
+    [Migration("20260526103454_CreateDB")]
     partial class CreateDB
     {
         /// <inheritdoc />
@@ -77,21 +77,6 @@ namespace AquariumData.Migrations
                     b.ToTable("Bookings");
                 });
 
-            modelBuilder.Entity("AquariumData.Entities.BookingClient", b =>
-                {
-                    b.Property<int>("BookingId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ClientId")
-                        .HasColumnType("int");
-
-                    b.HasKey("BookingId", "ClientId");
-
-                    b.HasIndex("ClientId");
-
-                    b.ToTable("BookingClient");
-                });
-
             modelBuilder.Entity("AquariumData.Entities.Exhibit", b =>
                 {
                     b.Property<int>("Id")
@@ -105,8 +90,9 @@ namespace AquariumData.Migrations
                         .HasMaxLength(1000)
                         .HasColumnType("nvarchar(1000)");
 
-                    b.Property<decimal>("EntryPrice")
-                        .HasColumnType("decimal(10,2)");
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Theme")
                         .IsRequired()
@@ -163,7 +149,7 @@ namespace AquariumData.Migrations
                     b.Property<int>("BookingId")
                         .HasColumnType("int");
 
-                    b.Property<int>("ClientId")
+                    b.Property<int?>("ClientId")
                         .HasColumnType("int");
 
                     b.Property<int>("ExhibitId")
@@ -240,25 +226,6 @@ namespace AquariumData.Migrations
                     b.Navigation("Employee");
                 });
 
-            modelBuilder.Entity("AquariumData.Entities.BookingClient", b =>
-                {
-                    b.HasOne("AquariumData.Entities.Booking", "Booking")
-                        .WithMany("BookingClients")
-                        .HasForeignKey("BookingId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("AquariumData.Entities.User", "Client")
-                        .WithMany("BookingClients")
-                        .HasForeignKey("ClientId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Booking");
-
-                    b.Navigation("Client");
-                });
-
             modelBuilder.Entity("AquariumData.Entities.Tank", b =>
                 {
                     b.HasOne("AquariumData.Entities.Exhibit", "Exhibit")
@@ -281,8 +248,7 @@ namespace AquariumData.Migrations
                     b.HasOne("AquariumData.Entities.User", "Client")
                         .WithMany("Tickets")
                         .HasForeignKey("ClientId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("AquariumData.Entities.Exhibit", "Exhibit")
                         .WithMany("Tickets")
@@ -299,8 +265,6 @@ namespace AquariumData.Migrations
 
             modelBuilder.Entity("AquariumData.Entities.Booking", b =>
                 {
-                    b.Navigation("BookingClients");
-
                     b.Navigation("Tickets");
                 });
 
@@ -318,8 +282,6 @@ namespace AquariumData.Migrations
 
             modelBuilder.Entity("AquariumData.Entities.User", b =>
                 {
-                    b.Navigation("BookingClients");
-
                     b.Navigation("EmployeeBookings");
 
                     b.Navigation("Tickets");

@@ -12,7 +12,7 @@ namespace AquariumController
     public class LoggingController
     {
         AquariumContext context = new AquariumContext();
-        public async Task<User> Login(string username, string email, string password)
+        public async Task<Userr> Login(string username, string email, string password)
         {
             return await context.Users.FirstOrDefaultAsync(x => x.Username == username && x.Email == email && x.Password == password);
         }

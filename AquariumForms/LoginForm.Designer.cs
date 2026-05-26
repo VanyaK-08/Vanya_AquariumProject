@@ -111,31 +111,31 @@ namespace AquariumForms
             // 
             // button1
             // 
-            button1.BackColor = Color.Transparent;
+            button1.BackColor = Color.LightSteelBlue;
             button1.FlatStyle = FlatStyle.Popup;
             button1.Font = new Font("Sans Serif Collection", 10.1999989F, FontStyle.Bold);
-            button1.ForeColor = SystemColors.ControlLightLight;
+            button1.ForeColor = SystemColors.ControlText;
             button1.Location = new Point(159, 354);
             button1.Name = "button1";
             button1.Size = new Size(117, 52);
             button1.TabIndex = 7;
             button1.Text = "Register";
             button1.UseVisualStyleBackColor = false;
-            button1.Click += this.button1_Click;
+            button1.Click += button1_Click;
             // 
             // button2
             // 
-            button2.BackColor = Color.Transparent;
+            button2.BackColor = Color.LightSteelBlue;
             button2.FlatStyle = FlatStyle.Popup;
             button2.Font = new Font("Sans Serif Collection", 10.1999989F, FontStyle.Bold);
-            button2.ForeColor = SystemColors.ControlLightLight;
+            button2.ForeColor = SystemColors.ControlText;
             button2.Location = new Point(510, 354);
             button2.Name = "button2";
             button2.Size = new Size(117, 52);
             button2.TabIndex = 8;
             button2.Text = "Login";
             button2.UseVisualStyleBackColor = false;
-            button2.Click += this.button2_Click;
+            button2.Click += button2_Click;
             // 
             // LoginForm
             // 

@@ -38,6 +38,9 @@
             comboBox1 = new ComboBox();
             button2 = new Button();
             backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            button1 = new Button();
+            label5 = new Label();
+            textBox4 = new TextBox();
             SuspendLayout();
             // 
             // label2
@@ -82,7 +85,7 @@
             label1.BackColor = Color.Transparent;
             label1.Font = new Font("Sans Serif Collection", 10.1999989F, FontStyle.Bold, GraphicsUnit.Point, 204);
             label1.ForeColor = SystemColors.ButtonHighlight;
-            label1.Location = new Point(121, 282);
+            label1.Location = new Point(121, 316);
             label1.Name = "label1";
             label1.Size = new Size(64, 58);
             label1.TabIndex = 8;
@@ -112,24 +115,57 @@
             // comboBox1
             // 
             comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(265, 291);
+            comboBox1.Location = new Point(265, 325);
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(199, 28);
             comboBox1.TabIndex = 12;
             // 
             // button2
             // 
-            button2.BackColor = Color.Transparent;
-            button2.FlatStyle = FlatStyle.Popup;
+            button2.BackColor = Color.LightSteelBlue;
+            button2.FlatStyle = FlatStyle.Flat;
             button2.Font = new Font("Sans Serif Collection", 10.1999989F, FontStyle.Bold);
-            button2.ForeColor = SystemColors.ControlLightLight;
-            button2.Location = new Point(514, 193);
+            button2.ForeColor = SystemColors.ControlText;
+            button2.Location = new Point(519, 159);
             button2.Name = "button2";
             button2.Size = new Size(117, 52);
             button2.TabIndex = 13;
-            button2.Text = "Login";
+            button2.Text = "Register";
             button2.UseVisualStyleBackColor = false;
-            button2.Click += button2_Click;
+            button2.Click += button2_ClickAsync;
+            // 
+            // button1
+            // 
+            button1.BackColor = Color.LightSteelBlue;
+            button1.FlatStyle = FlatStyle.Flat;
+            button1.Font = new Font("Sans Serif Collection", 10.1999989F, FontStyle.Bold);
+            button1.ForeColor = SystemColors.ControlText;
+            button1.Location = new Point(519, 268);
+            button1.Name = "button1";
+            button1.Size = new Size(117, 52);
+            button1.TabIndex = 14;
+            button1.Text = "Cancel";
+            button1.UseVisualStyleBackColor = false;
+            button1.Click += button1_Click;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.BackColor = Color.Transparent;
+            label5.Font = new Font("Sans Serif Collection", 10.1999989F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            label5.ForeColor = SystemColors.ButtonHighlight;
+            label5.Location = new Point(76, 268);
+            label5.Name = "label5";
+            label5.Size = new Size(183, 58);
+            label5.TabIndex = 15;
+            label5.Text = "Confirm password";
+            // 
+            // textBox4
+            // 
+            textBox4.Location = new Point(265, 277);
+            textBox4.Name = "textBox4";
+            textBox4.Size = new Size(199, 27);
+            textBox4.TabIndex = 16;
             // 
             // RegisterForm
             // 
@@ -138,6 +174,9 @@
             BackgroundImage = Properties.Resources.register;
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(800, 450);
+            Controls.Add(textBox4);
+            Controls.Add(label5);
+            Controls.Add(button1);
             Controls.Add(button2);
             Controls.Add(comboBox1);
             Controls.Add(textBox3);
@@ -149,6 +188,7 @@
             Controls.Add(label2);
             Name = "RegisterForm";
             Text = "RegisterForm";
+            Load += RegisterForm_Load;
             ResumeLayout(false);
             PerformLayout();
         }
@@ -165,5 +205,8 @@
         private ComboBox comboBox1;
         private Button button2;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private Button button1;
+        private Label label5;
+        private TextBox textBox4;
     }
 }

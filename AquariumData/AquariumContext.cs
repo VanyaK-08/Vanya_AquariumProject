@@ -11,7 +11,7 @@ namespace AquariumData
         public DbSet<Exhibit> Exhibits { get; set; }
         public DbSet<Booking> Bookings { get; set; }
         public DbSet<Ticket> Tickets { get; set; }
-        public DbSet<User> Users { get; set; }
+        public DbSet<Userr> Users { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             var builder = new ConfigurationBuilder();
@@ -23,25 +23,25 @@ namespace AquariumData
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //user
-            modelBuilder.Entity<User>()
+            modelBuilder.Entity<Userr>()
                 .HasKey(u => u.Id);
 
-            modelBuilder.Entity<User>()
+            modelBuilder.Entity<Userr>()
                 .Property(u => u.Username)
                 .HasMaxLength(50)
                 .IsRequired();
 
-            modelBuilder.Entity<User>()
+            modelBuilder.Entity<Userr>()
                 .Property(u => u.Email)
                 .HasMaxLength(100)
                 .IsRequired();
 
-            modelBuilder.Entity<User>()
+            modelBuilder.Entity<Userr>()
                 .Property(u => u.Password)
                 .HasMaxLength(255)
                 .IsRequired();
 
-            modelBuilder.Entity<User>()
+            modelBuilder.Entity<Userr>()
                 .Property(u => u.Role)
                 .HasConversion<string>();
 
@@ -103,8 +103,8 @@ namespace AquariumData
                 .HasMaxLength(1000);
 
             modelBuilder.Entity<Exhibit>()
-                .Property(e => e.EntryPrice)
-                .HasColumnType("decimal(10,2)");
+                .Property(e=>e.ImageUrl)
+                .IsRequired();
 
             //booking
             modelBuilder.Entity<Booking>()
@@ -118,22 +118,6 @@ namespace AquariumData
                 .HasOne(b => b.Employee)
                 .WithMany(u => u.EmployeeBookings)
                 .HasForeignKey(b => b.UserEmployeeId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            //bookingclient
-            modelBuilder.Entity<BookingClient>()
-                .HasKey(bc => new { bc.BookingId, bc.ClientId });
-
-            modelBuilder.Entity<BookingClient>()
-                .HasOne(bc => bc.Booking)
-                .WithMany(b => b.BookingClients)
-                .HasForeignKey(bc => bc.BookingId)
-                .OnDelete(DeleteBehavior.Cascade);
-
-            modelBuilder.Entity<BookingClient>()
-                .HasOne(bc => bc.Client)
-                .WithMany(u => u.BookingClients)
-                .HasForeignKey(bc => bc.ClientId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             //ticket

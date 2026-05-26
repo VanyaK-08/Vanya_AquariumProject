@@ -30,9 +30,9 @@
         {
             listBox1 = new ListBox();
             button2 = new Button();
-            button1 = new Button();
             button3 = new Button();
             button4 = new Button();
+            button1 = new Button();
             SuspendLayout();
             // 
             // listBox1
@@ -46,56 +46,59 @@
             // 
             // button2
             // 
-            button2.BackColor = Color.Transparent;
+            button2.BackColor = Color.LightSteelBlue;
             button2.FlatStyle = FlatStyle.Popup;
             button2.Font = new Font("Sans Serif Collection", 10.1999989F, FontStyle.Bold);
-            button2.ForeColor = SystemColors.ControlLightLight;
-            button2.Location = new Point(304, 32);
+            button2.ForeColor = SystemColors.ControlText;
+            button2.Location = new Point(315, 92);
             button2.Name = "button2";
             button2.Size = new Size(182, 52);
             button2.TabIndex = 14;
             button2.Text = "Buy a new ticket";
             button2.UseVisualStyleBackColor = false;
-            // 
-            // button1
-            // 
-            button1.BackColor = Color.Transparent;
-            button1.FlatStyle = FlatStyle.Popup;
-            button1.Font = new Font("Sans Serif Collection", 10.1999989F, FontStyle.Bold);
-            button1.ForeColor = SystemColors.ControlLightLight;
-            button1.Location = new Point(304, 107);
-            button1.Name = "button1";
-            button1.Size = new Size(267, 52);
-            button1.TabIndex = 15;
-            button1.Text = "Change ticket information";
-            button1.UseVisualStyleBackColor = false;
+            button2.Click += button2_Click;
             // 
             // button3
             // 
-            button3.BackColor = Color.Transparent;
+            button3.BackColor = Color.LightSteelBlue;
             button3.FlatStyle = FlatStyle.Popup;
             button3.Font = new Font("Sans Serif Collection", 10.1999989F, FontStyle.Bold);
-            button3.ForeColor = SystemColors.ControlLightLight;
+            button3.ForeColor = SystemColors.ControlText;
             button3.Location = new Point(28, 362);
             button3.Name = "button3";
             button3.Size = new Size(312, 52);
             button3.TabIndex = 16;
             button3.Text = "See detailed ticket information";
             button3.UseVisualStyleBackColor = false;
+            button3.Click += button3_Click;
             // 
             // button4
             // 
-            button4.BackColor = Color.Transparent;
+            button4.BackColor = Color.LightSteelBlue;
             button4.FlatStyle = FlatStyle.Popup;
             button4.Font = new Font("Sans Serif Collection", 10.1999989F, FontStyle.Bold);
-            button4.ForeColor = SystemColors.ControlLightLight;
-            button4.Location = new Point(304, 180);
+            button4.ForeColor = SystemColors.ControlText;
+            button4.Location = new Point(315, 32);
             button4.Name = "button4";
-            button4.Size = new Size(145, 52);
+            button4.Size = new Size(182, 52);
             button4.TabIndex = 17;
             button4.Text = "See exhibits";
             button4.UseVisualStyleBackColor = false;
             button4.Click += button4_Click;
+            // 
+            // button1
+            // 
+            button1.BackColor = Color.LightSteelBlue;
+            button1.FlatStyle = FlatStyle.Popup;
+            button1.Font = new Font("Sans Serif Collection", 10.1999989F, FontStyle.Bold);
+            button1.ForeColor = SystemColors.ControlText;
+            button1.Location = new Point(315, 150);
+            button1.Name = "button1";
+            button1.Size = new Size(182, 52);
+            button1.TabIndex = 15;
+            button1.Text = "Unbook ticket";
+            button1.UseVisualStyleBackColor = false;
+            button1.Click += button1_Click;
             // 
             // ClientForm
             // 
@@ -118,8 +121,8 @@
 
         private ListBox listBox1;
         private Button button2;
-        private Button button1;
         private Button button3;
         private Button button4;
+        private Button button1;
     }
 }

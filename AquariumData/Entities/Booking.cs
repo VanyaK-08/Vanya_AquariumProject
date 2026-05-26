@@ -8,10 +8,12 @@
 
         public int UserEmployeeId { get; set; }
 
-        public User? Employee { get; set; }
-
-        public ICollection<BookingClient> BookingClients { get; set; } = new List<BookingClient>();
+        public Userr? Employee { get; set; }
 
         public ICollection<Ticket> Tickets { get; set; } = new List<Ticket>();
+        public override string ToString()
+        {
+            return $"{BookingDate:yyyy-MM-dd}";
+        }
     }
 }

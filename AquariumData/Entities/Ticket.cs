@@ -22,8 +22,13 @@ namespace AquariumData.Entities
 
         public Exhibit? Exhibit { get; set; }
 
-        public int ClientId { get; set; }
+        public int? ClientId { get; set; }
 
-        public User? Client { get; set; }
+        public Userr? Client { get; set; }
+
+        public override string ToString()
+            {
+                return $"{Exhibit.Title} - {Price:f2}";
+        }
     }
 }

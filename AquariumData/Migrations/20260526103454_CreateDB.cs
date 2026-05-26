@@ -20,7 +20,7 @@ namespace AquariumData.Migrations
                     Title = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
                     Theme = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Description = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: false),
-                    EntryPrice = table.Column<decimal>(type: "decimal(10,2)", nullable: false)
+                    ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -108,30 +108,6 @@ namespace AquariumData.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "BookingClient",
-                columns: table => new
-                {
-                    BookingId = table.Column<int>(type: "int", nullable: false),
-                    ClientId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_BookingClient", x => new { x.BookingId, x.ClientId });
-                    table.ForeignKey(
-                        name: "FK_BookingClient_Bookings_BookingId",
-                        column: x => x.BookingId,
-                        principalTable: "Bookings",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_BookingClient_Users_ClientId",
-                        column: x => x.ClientId,
-                        principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Tickets",
                 columns: table => new
                 {
@@ -141,7 +117,7 @@ namespace AquariumData.Migrations
                     VisitDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     BookingId = table.Column<int>(type: "int", nullable: false),
                     ExhibitId = table.Column<int>(type: "int", nullable: false),
-                    ClientId = table.Column<int>(type: "int", nullable: false)
+                    ClientId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -170,11 +146,6 @@ namespace AquariumData.Migrations
                 name: "IX_Animals_TankId",
                 table: "Animals",
                 column: "TankId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_BookingClient_ClientId",
-                table: "BookingClient",
-                column: "ClientId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Bookings_UserEmployeeId",
@@ -207,9 +178,6 @@ namespace AquariumData.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Animals");
-
-            migrationBuilder.DropTable(
-                name: "BookingClient");
 
             migrationBuilder.DropTable(
                 name: "Tickets");

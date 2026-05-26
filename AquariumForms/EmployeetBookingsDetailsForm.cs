@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace AquariumForms
 {
-    public partial class ClientBookingsForm : Form
+    public partial class EmployeetBookingsDetailsForm : Form
     {
-        public ClientBookingsForm()
+        public EmployeetBookingsDetailsForm()
         {
             InitializeComponent();
         }

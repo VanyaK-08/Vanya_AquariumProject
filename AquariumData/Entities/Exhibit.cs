@@ -16,10 +16,10 @@ namespace AquariumData.Entities
 
         public string Description { get; set; } = string.Empty;
 
-        public decimal EntryPrice { get; set; }
-
         public ICollection<Tank> Tanks { get; set; } = new List<Tank>();
 
         public ICollection<Ticket> Tickets { get; set; } = new List<Ticket>();
+
+        public string ImageUrl { get; set; } = string.Empty;
     }
 }
