@@ -144,6 +144,7 @@
             button2.TabIndex = 9;
             button2.Text = "Cancel";
             button2.UseVisualStyleBackColor = false;
+            button2.Click += button2_Click;
             // 
             // AddUpdateTicketsForm
             // 
@@ -164,6 +165,7 @@
             Controls.Add(label1);
             Name = "AddUpdateTicketsForm";
             Text = "AddTicketsForm";
+            Load += AddUpdateTicketsForm_Load;
             ((System.ComponentModel.ISupportInitialize)numericUpDown1).EndInit();
             ResumeLayout(false);
             PerformLayout();

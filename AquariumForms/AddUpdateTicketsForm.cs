@@ -8,23 +8,25 @@ namespace AquariumForms
         public AddUpdateTicketsForm()
         {
             InitializeComponent();
-            BookingController bookingcontroller = new BookingController();
-            comboBox1.DataSource = bookingcontroller.GetAllBookings();
+
+
             comboBox1.DisplayMember = "ToString";
-            ExhibitController exhibitController = new ExhibitController();
-            comboBox2.DataSource = exhibitController.GetAllExhibits();
+
+
             comboBox2.DisplayMember = "ToString";
         }
+        BookingController bookingcontroller = new BookingController();
+        ExhibitController exhibitController = new ExhibitController();
         public AddUpdateTicketsForm(Ticket selectedTicket)
         {
             InitializeComponent();
             editTicket = selectedTicket;
-            BookingController bookingcontroller = new BookingController();
-            comboBox1.DataSource = bookingcontroller.GetAllBookings();
-            comboBox1.DisplayMember = "ToString";
-            ExhibitController exhibitController = new ExhibitController();
-            comboBox2.DataSource = exhibitController.GetAllExhibits();
-            comboBox2.DisplayMember = "ToString";
+
+
+            comboBox1.DisplayMember = "Id";
+
+
+            comboBox2.DisplayMember = "Title";
             numericUpDown1.Value = editTicket.Price;
             dateTimePicker1.Value = editTicket.VisitDate;
             comboBox1.SelectedItem = editTicket.Booking;
@@ -73,6 +75,18 @@ namespace AquariumForms
                 ExhibitId = exhibit.Id
             };
             Ticket = ticket;
+            DialogResult = DialogResult.OK; 
+        }
+
+        private async void AddUpdateTicketsForm_Load(object sender, EventArgs e)
+        {
+            comboBox1.DataSource = await bookingcontroller.GetAllBookings();
+            comboBox2.DataSource = await exhibitController.GetAllExhibits();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            DialogResult = DialogResult.Cancel;
         }
     }
 }

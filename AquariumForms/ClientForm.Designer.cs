@@ -114,6 +114,7 @@
             Controls.Add(listBox1);
             Name = "ClientForm";
             Text = "ClientForm";
+            Load += ClientForm_Load;
             ResumeLayout(false);
         }
 

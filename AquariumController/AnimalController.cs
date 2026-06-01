@@ -6,10 +6,18 @@ namespace AquariumController
 {
     public class AnimalController
     {
-        AquariumContext context = new AquariumContext();
+        private AquariumContext context;
+        public AnimalController()
+        {
+            context = new AquariumContext();
+        }
+        public AnimalController(AquariumContext context)
+        {
+            this.context = context;
+        }
         public async Task<List<Animal>> GetAllAnimals()
         {
-            return await context.Animals.Include(a=>a.Tank).ToListAsync();
+            return await context.Animals.Include(a => a.Tank).ToListAsync();
         }
 
         public async Task AddAnimal(Animal animal)

@@ -8,10 +8,11 @@ namespace AquariumForms
         public AddUpdateAnimalForm()
         {
             InitializeComponent();
-            TankController controller = new TankController();
-            comboBox1.DataSource = controller.GetAllTanks();
+            
             comboBox1.DisplayMember = "ToString";
         }
+        TankController tankcontroller = new TankController();
+        AnimalController animalcontroller = new AnimalController();
         public AddUpdateAnimalForm(Animal selectedAnimal)
         {
             InitializeComponent();
@@ -19,16 +20,16 @@ namespace AquariumForms
             textBox1.Text = editAnimal.Name;
             textBox2.Text = editAnimal.Species;
             dateTimePicker1.Value = editAnimal.ArrivalDate;
-            TankController controller = new TankController();
-            comboBox1.DataSource = controller.GetAllTanks();
-            comboBox1.DisplayMember = "ToString";
+            
+            comboBox1.DataSource = tankcontroller.GetAllTanks();
+            comboBox1.DisplayMember = "Name";
             comboBox1.SelectedItem = editAnimal.Tank;
         }
         public Animal Animal = null;
         public Animal editAnimal = null;
         private void button1_Click(object sender, EventArgs e)
         {
-            AnimalController controller = new AnimalController();
+            
             string name = textBox1.Text;
             string species = textBox2.Text;
             DateTime arrivalDate = dateTimePicker1.Value;
@@ -61,11 +62,18 @@ namespace AquariumForms
             animal.TankId = tankId;
             animal.Tank = tank;
             Animal = animal;
+            DialogResult = DialogResult.OK;
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;
+        }
+
+        private async void AddUpdateAnimalForm_Load(object sender, EventArgs e)
+        {
+            TankController controller = new TankController();
+            comboBox1.DataSource = await controller.GetAllTanks();
         }
     }
 }

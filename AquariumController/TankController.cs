@@ -11,7 +11,15 @@ namespace AquariumController
 {
     public class TankController
     {
-        AquariumContext context = new AquariumContext();
+        private AquariumContext context;
+        public TankController()
+        {
+            context = new AquariumContext();
+        }
+        public TankController(AquariumContext context)
+        {
+            this.context = context;
+        }
         public async Task<List<Tank>> GetAllTanks()
         {
             return await context.Tanks.Include(t=>t.Exhibit).ToListAsync();

@@ -8,11 +8,11 @@ namespace AquariumForms
         public ClientBookTicket(Userr currentClient)
         {
             InitializeComponent();
-            TicketController controller = new TicketController();
-            comboBox1.DataSource = controller.GetAllTickets();
+            
             comboBox1.DisplayMember = "ToString";
             this.currentClient1 = currentClient;
         }
+        TicketController ticketController = new TicketController();
         private Userr currentClient1 { get; set; }
         public Ticket Ticket = null;
         private void button1_Click(object sender, EventArgs e)
@@ -30,6 +30,11 @@ namespace AquariumForms
         private void button2_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;
+        }
+
+        private async void ClientBookTicket_Load(object sender, EventArgs e)
+        {
+            comboBox1.DataSource = await ticketController.GetAllTickets();
         }
     }
 }

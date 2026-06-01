@@ -26,8 +26,15 @@ namespace AquariumForms
         private async void button2_Click(object sender, EventArgs e)
         {
             this.Hide();
-            ClientBookTicket bookTicket = new ClientBookTicket(currentClient1);
             TicketController controller = new TicketController();
+            var checkTickets = await controller.GetAllTickets();
+            if (checkTickets.Count == 0)
+            {
+                MessageBox.Show("No tickets available for booking at the moment.");
+                this.Show();
+                return;
+            }
+            ClientBookTicket bookTicket = new ClientBookTicket(currentClient1);
             bookTicket.ShowDialog();
             if (bookTicket.DialogResult == DialogResult.OK)
             {
@@ -84,6 +91,15 @@ namespace AquariumForms
                 MessageBox.Show("Please select a trip to view details.");
             }
             this.Show();
+        }
+
+        private void ClientForm_Load(object sender, EventArgs e)
+        {
+            List<Ticket> tickets = currentClient1.Tickets.ToList();
+            foreach (var item in tickets)
+            {
+                listBox1.Items.Add(item.ToString());
+            }
         }
     }
 }

@@ -7,7 +7,15 @@ namespace AquariumController
 {
     public class TicketController
     {
-        AquariumContext context = new AquariumContext();
+        private AquariumContext context;
+        public TicketController()
+        {
+            context = new AquariumContext();
+        }
+        public TicketController(AquariumContext context)
+        {
+            this.context = context;
+        }
         public async Task AddTicket(Ticket ticket)
         {
             if (ticket.Price <= 0)

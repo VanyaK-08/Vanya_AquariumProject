@@ -21,6 +21,13 @@ namespace AquariumForms
         {
             listBox1.Items.Clear();
             AnimalController controller = new AnimalController();
+            var checkAnimals = await controller.GetAllAnimals();
+            if (checkAnimals.Count == 0)
+            {
+                MessageBox.Show("No animals added at the moment.");
+                this.Show();
+                return;
+            }
             List<Animal> animals = await controller.GetAllAnimals();
             foreach (Animal animal in animals)
             {
@@ -80,6 +87,13 @@ namespace AquariumForms
         {
             listBox1.Items.Clear();
             TankController controller = new TankController();
+            var checkTanks = await controller.GetAllTanks();
+            if (checkTanks.Count == 0)
+            {
+                MessageBox.Show("No tanks available for booking at the moment.");
+                this.Show();
+                return;
+            }
             List<Tank> tanks = await controller.GetAllTanks();
             foreach (Tank tank in tanks)
             {
@@ -236,6 +250,13 @@ namespace AquariumForms
         private void button10_Click(object sender, EventArgs e)
         {
             BookingController controller = new BookingController();
+            List<Booking> checkBookings = controller.GetBookingForEmployee(currentEmployee).Result;
+            if (checkBookings.Count == 0)
+            {
+                MessageBox.Show("No tickets available for booking at the moment.");
+                this.Show();
+                return;
+            }
             listBox1.Items.Clear();
             List<Booking> bookings = controller.GetBookingForEmployee(currentEmployee).Result;
             foreach (Booking booking in bookings)
@@ -317,10 +338,17 @@ namespace AquariumForms
             this.Show();
         }
 
-        private void button15_Click(object sender, EventArgs e)
+        private async void button15_Click(object sender, EventArgs e)
         {
             listBox1.Items.Clear();
             TicketController controller = new TicketController();
+            var checkTickets = await controller.GetAllTickets();
+            if (checkTickets.Count == 0)
+            {
+                MessageBox.Show("No tickets available for booking at the moment.");
+                this.Show();
+                return;
+            }
             List<Ticket> tickets = controller.GetAllTickets().Result;
             foreach (Ticket ticket in tickets)
             {

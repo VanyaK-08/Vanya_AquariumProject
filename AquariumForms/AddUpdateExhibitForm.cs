@@ -60,11 +60,18 @@ namespace AquariumForms
             fileDialog.ShowDialog();
             ex.ImageUrl = fileDialog.FileName;
             Exhibit = ex;
+            DialogResult = DialogResult.OK;
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
+            pictureBox1.Image = Image.FromFile(editExhibit.ImageUrl);
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+        }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            DialogResult = DialogResult.Cancel;
         }
     }
 }

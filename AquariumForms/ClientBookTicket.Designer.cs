@@ -91,6 +91,7 @@
             Controls.Add(comboBox1);
             Name = "ClientBookTicket";
             Text = "ClientBookChangeTicket";
+            Load += ClientBookTicket_Load;
             ResumeLayout(false);
             PerformLayout();
         }

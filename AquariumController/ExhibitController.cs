@@ -6,7 +6,15 @@ namespace AquariumController
 {
     public class ExhibitController
     {
-        AquariumContext context = new AquariumContext();
+        private AquariumContext context;
+        public ExhibitController()
+        {
+            context = new AquariumContext();
+        }
+        public ExhibitController(AquariumContext context)
+        {
+            this.context = context;
+        }
         public async Task<List<Exhibit>> GetAllExhibits()
         {
             return await context.Exhibits.ToListAsync();

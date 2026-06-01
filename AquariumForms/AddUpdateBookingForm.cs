@@ -18,6 +18,7 @@ namespace AquariumForms
         {
             InitializeComponent();
         }
+        BookingController controller = new BookingController();
         public AddUpdateBookingForm(Userr curEmployee)
         {
             InitializeComponent();
@@ -39,14 +40,19 @@ namespace AquariumForms
                 MessageBox.Show("Booking date cannot be in the past.");
                 return;
             }
-            BookingController controller = new BookingController();
+
             Booking newBooking = new Booking
             {
                 BookingDate = dateTimePicker1.Value,
                 UserEmployeeId = currentEmployee.Id,
             };
             booking = newBooking;
-            
+            DialogResult = DialogResult.OK;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            DialogResult = DialogResult.Cancel;
         }
     }
 }

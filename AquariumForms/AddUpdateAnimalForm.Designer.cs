@@ -160,6 +160,7 @@
             Controls.Add(label3);
             Name = "AddUpdateAnimalForm";
             Text = "AddAnimalForm";
+            Load += AddUpdateAnimalForm_Load;
             ResumeLayout(false);
             PerformLayout();
         }

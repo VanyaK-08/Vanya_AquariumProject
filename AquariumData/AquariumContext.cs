@@ -6,6 +6,15 @@ namespace AquariumData
 {
     public class AquariumContext : DbContext
     {
+        public AquariumContext()
+        {
+
+        }
+
+        public AquariumContext(DbContextOptions<AquariumContext> options) : base(options)
+        {
+
+        }
         public DbSet<Animal> Animals { get; set; }
         public DbSet<Tank> Tanks { get; set; }
         public DbSet<Exhibit> Exhibits { get; set; }
@@ -14,11 +23,14 @@ namespace AquariumData
         public DbSet<Userr> Users { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            if (!optionsBuilder.IsConfigured)
+            {
             var builder = new ConfigurationBuilder();
             builder.AddJsonFile("appsettings.json");
             var config = builder.Build();
             string connectionstring = config.GetConnectionString("DefaultConnection");
             optionsBuilder.UseSqlServer(connectionstring);
+            }
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

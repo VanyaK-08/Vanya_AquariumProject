@@ -11,7 +11,15 @@ namespace AquariumController
 {
     public class BookingController
     {
-        AquariumContext context = new AquariumContext();
+        private AquariumContext context;
+        public BookingController()
+        {
+            context = new AquariumContext();
+        }
+        public BookingController(AquariumContext context)
+        {
+            this.context = context;
+        }
         public async Task<List<Booking>> GetBookingForEmployee(Userr employee)
         {
             return await context.Bookings
