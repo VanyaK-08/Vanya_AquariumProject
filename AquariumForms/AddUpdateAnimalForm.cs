@@ -1,14 +1,5 @@
 ﻿using AquariumController;
 using AquariumData.Entities;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace AquariumForms
 {
@@ -21,13 +12,26 @@ namespace AquariumForms
             comboBox1.DataSource = controller.GetAllTanks();
             comboBox1.DisplayMember = "ToString";
         }
-
-        private async void button1_Click(object sender, EventArgs e)
+        public AddUpdateAnimalForm(Animal selectedAnimal)
+        {
+            InitializeComponent();
+            editAnimal = selectedAnimal;
+            textBox1.Text = editAnimal.Name;
+            textBox2.Text = editAnimal.Species;
+            dateTimePicker1.Value = editAnimal.ArrivalDate;
+            TankController controller = new TankController();
+            comboBox1.DataSource = controller.GetAllTanks();
+            comboBox1.DisplayMember = "ToString";
+            comboBox1.SelectedItem = editAnimal.Tank;
+        }
+        public Animal Animal = null;
+        public Animal editAnimal = null;
+        private void button1_Click(object sender, EventArgs e)
         {
             AnimalController controller = new AnimalController();
             string name = textBox1.Text;
             string species = textBox2.Text;
-            DateTime arrivalDate = DateTime.Now;
+            DateTime arrivalDate = dateTimePicker1.Value;
             Tank tank = (Tank)comboBox1.SelectedItem;
             int tankId = tank.Id;
             if (string.IsNullOrEmpty(name) || string.IsNullOrWhiteSpace(name))
@@ -56,15 +60,7 @@ namespace AquariumForms
             animal.ArrivalDate = arrivalDate;
             animal.TankId = tankId;
             animal.Tank = tank;
-            try
-            {
-                await controller.AddAnimal(animal);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            DialogResult = DialogResult.OK;
+            Animal = animal;
         }
 
         private void button2_Click(object sender, EventArgs e)

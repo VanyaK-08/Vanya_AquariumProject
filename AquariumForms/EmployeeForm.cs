@@ -1,5 +1,6 @@
 ﻿using AquariumController;
 using AquariumData.Entities;
+using System.Threading.Tasks;
 
 namespace AquariumForms
 {
@@ -27,14 +28,22 @@ namespace AquariumForms
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private async void button2_Click(object sender, EventArgs e)
         {
             this.Hide();
             AddUpdateAnimalForm animalForm = new AddUpdateAnimalForm();
+            AnimalController controller = new AnimalController();
             animalForm.ShowDialog();
             if (animalForm.DialogResult == DialogResult.OK)
             {
-                MessageBox.Show("Animal added successfully.");
+                try
+                {
+                    await controller.AddAnimal(animalForm.Animal);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
             this.Show();
         }
@@ -47,14 +56,22 @@ namespace AquariumForms
             this.Show();
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private async void button4_Click(object sender, EventArgs e)
         {
             this.Hide();
             AddUpdateExhibitForm exhibits = new AddUpdateExhibitForm();
+            ExhibitController controller = new ExhibitController();
             exhibits.ShowDialog();
             if (exhibits.DialogResult == DialogResult.OK)
             {
-                MessageBox.Show("Exhibit added succesfully!");
+                try
+                {
+                    await controller.AddExhibit(exhibits.Exhibit);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
             this.Show();
         }
@@ -70,21 +87,280 @@ namespace AquariumForms
             }
         }
 
-        private void button6_Click(object sender, EventArgs e)
+        private async void button6_Click(object sender, EventArgs e)
         {
             this.Hide();
             AddUpdateTankForm tankForm = new AddUpdateTankForm();
+            TankController controller = new TankController();
             tankForm.ShowDialog();
             if (tankForm.DialogResult == DialogResult.OK)
             {
-                MessageBox.Show("Tank added succesfully!");
+                try
+                {
+                    await controller.AddTank(tankForm.Tank);
+                }
+                catch (Exception ex)
+                {
+
+                    throw;
+                }
             }
             this.Show();
         }
 
-        private void button7_Click(object sender, EventArgs e)
+        private async void button7_Click(object sender, EventArgs e)
         {
+            this.Hide();
+            if (listBox1.SelectedIndex != -1)
+            {
+                Animal selectedAnimal = (Animal)listBox1.Items[listBox1.SelectedIndex];
+                try
+                {
+                    AddUpdateAnimalForm updated = new AddUpdateAnimalForm(selectedAnimal);
+                    AnimalController controller = new AnimalController();
+                    updated.ShowDialog();
+                    if (updated.DialogResult == DialogResult.OK)
+                    {
+                        try
+                        {
+                            await controller.UpdateAnimal(updated.Animal);
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please select an animal to view details.");
+            }
+            this.Show();
+        }
 
+        private async void button8_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            if (listBox1.SelectedIndex != -1)
+            {
+                Exhibit selectedExhibit = (Exhibit)listBox1.Items[listBox1.SelectedIndex];
+                try
+                {
+                    AddUpdateExhibitForm updated = new AddUpdateExhibitForm(selectedExhibit);
+                    ExhibitController controller = new ExhibitController();
+                    updated.ShowDialog();
+                    if (updated.DialogResult == DialogResult.OK)
+                    {
+                        try
+                        {
+                            await controller.UpdateExhibit(updated.Exhibit);
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please select an exhibit to view details.");
+            }
+            this.Show();
+        }
+
+        private async void button9_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            if (listBox1.SelectedIndex != -1)
+            {
+                Tank selectedTank = (Tank)listBox1.Items[listBox1.SelectedIndex];
+                try
+                {
+                    AddUpdateTankForm updated = new AddUpdateTankForm(selectedTank);
+                    TankController controller = new TankController();
+                    updated.ShowDialog();
+                    if (updated.DialogResult == DialogResult.OK)
+                    {
+                        try
+                        {
+                            await controller.UpdateTank(updated.Tank);
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please select a tank to view details.");
+            }
+            this.Show();
+        }
+
+        private async void button13_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            AddUpdateBookingForm bookingForm = new AddUpdateBookingForm();
+            BookingController controller = new BookingController();
+            bookingForm.ShowDialog();
+            if (bookingForm.DialogResult == DialogResult.OK)
+            {
+                try
+                {
+                    await controller.AddBooking(bookingForm.booking);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+            this.Show();
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            BookingController controller = new BookingController();
+            listBox1.Items.Clear();
+            List<Booking> bookings = controller.GetBookingForEmployee(currentEmployee).Result;
+            foreach (Booking booking in bookings)
+            {
+                listBox1.Items.Add(booking.ToString());
+            }
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            if (listBox1.SelectedIndex != -1)
+            {
+                int index = listBox1.SelectedIndex;
+                Booking booking = (Booking)listBox1.Items[index];
+                EmployeetBookingsDetailsForm details = new EmployeetBookingsDetailsForm(booking);
+                details.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Please select a trip to view details.");
+            }
+            this.Show();
+
+        }
+
+        private async void button12_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            if (listBox1.SelectedIndex != -1)
+            {
+                Booking selectedBooking = (Booking)listBox1.Items[listBox1.SelectedIndex];
+                try
+                {
+                    AddUpdateBookingForm updated = new AddUpdateBookingForm(selectedBooking);
+                    BookingController controller = new BookingController();
+                    updated.ShowDialog();
+                    if (updated.DialogResult == DialogResult.OK)
+                    {
+                        try
+                        {
+                            await controller.UpdateBooking(updated.booking);
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please select a booking to view details.");
+            }
+            this.Show();
+        }
+
+        private async void button14_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            AddUpdateTicketsForm ticketsForm = new AddUpdateTicketsForm();
+            TicketController controller = new TicketController();
+            ticketsForm.ShowDialog();
+            if (ticketsForm.DialogResult == DialogResult.OK)
+            {
+                try
+                {
+                    await controller.AddTicket(ticketsForm.Ticket);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+            this.Show();
+        }
+
+        private void button15_Click(object sender, EventArgs e)
+        {
+            listBox1.Items.Clear();
+            TicketController controller = new TicketController();
+            List<Ticket> tickets = controller.GetAllTickets().Result;
+            foreach (Ticket ticket in tickets)
+            {
+                listBox1.Items.Add(ticket.ToString());
+            }
+        }
+
+        private async void button16_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            if (listBox1.SelectedIndex != -1)
+            {
+                Ticket selectedTicket = (Ticket)listBox1.Items[listBox1.SelectedIndex];
+                try
+                {
+                    AddUpdateTicketsForm updated = new AddUpdateTicketsForm(selectedTicket);
+                    TicketController controller = new TicketController();
+                    updated.ShowDialog();
+                    if (updated.DialogResult == DialogResult.OK)
+                    {
+                        try
+                        {
+                            await controller.UpdateTicket(updated.Ticket);
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please select a ticket to view details.");
+            }
+            this.Show();
         }
     }
 }

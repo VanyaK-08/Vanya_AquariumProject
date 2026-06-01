@@ -28,18 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            listBox1 = new ListBox();
             button1 = new Button();
+            richTextBox1 = new RichTextBox();
             SuspendLayout();
-            // 
-            // listBox1
-            // 
-            listBox1.BackColor = Color.AliceBlue;
-            listBox1.FormattingEnabled = true;
-            listBox1.Location = new Point(227, 26);
-            listBox1.Name = "listBox1";
-            listBox1.Size = new Size(309, 344);
-            listBox1.TabIndex = 0;
             // 
             // button1
             // 
@@ -51,6 +42,16 @@
             button1.TabIndex = 1;
             button1.Text = "OK";
             button1.UseVisualStyleBackColor = false;
+            button1.Click += button1_Click;
+            // 
+            // richTextBox1
+            // 
+            richTextBox1.Location = new Point(210, 27);
+            richTextBox1.Name = "richTextBox1";
+            richTextBox1.ReadOnly = true;
+            richTextBox1.Size = new Size(315, 343);
+            richTextBox1.TabIndex = 2;
+            richTextBox1.Text = "";
             // 
             // EmployeetBookingsDetailsForm
             // 
@@ -59,16 +60,16 @@
             BackgroundImage = Properties.Resources.employeeBookingsDetails;
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(800, 450);
+            Controls.Add(richTextBox1);
             Controls.Add(button1);
-            Controls.Add(listBox1);
             Name = "EmployeetBookingsDetailsForm";
             Text = "ClientBookingsForm";
+            Load += EmployeetBookingsDetailsForm_Load;
             ResumeLayout(false);
         }
 
         #endregion
-
-        private ListBox listBox1;
         private Button button1;
+        private RichTextBox richTextBox1;
     }
 }

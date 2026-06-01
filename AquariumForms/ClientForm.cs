@@ -1,14 +1,5 @@
 ﻿using AquariumController;
 using AquariumData.Entities;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace AquariumForms
 {
@@ -32,14 +23,22 @@ namespace AquariumForms
             this.Show();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private async void button2_Click(object sender, EventArgs e)
         {
             this.Hide();
             ClientBookTicket bookTicket = new ClientBookTicket(currentClient1);
+            TicketController controller = new TicketController();
             bookTicket.ShowDialog();
             if (bookTicket.DialogResult == DialogResult.OK)
             {
-                MessageBox.Show("Ticket booked successfully.");
+                try
+                {
+                    await controller.BookTicketClient(bookTicket.Ticket, currentClient1);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
             this.Show();
         }
@@ -74,7 +73,7 @@ namespace AquariumForms
             this.Hide();
             if (listBox1.SelectedIndex != -1)
             {
-                
+
                 int index = listBox1.SelectedIndex;
                 Ticket ticket = (Ticket)listBox1.Items[index];
                 ClientTicketDetails details = new ClientTicketDetails(ticket);

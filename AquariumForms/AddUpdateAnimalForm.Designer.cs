@@ -46,9 +46,9 @@
             label3.BackColor = Color.Transparent;
             label3.Font = new Font("Sans Serif Collection", 10.1999989F, FontStyle.Bold);
             label3.ForeColor = SystemColors.ButtonHighlight;
-            label3.Location = new Point(165, 80);
+            label3.Location = new Point(189, 107);
             label3.Name = "label3";
-            label3.Size = new Size(64, 48);
+            label3.Size = new Size(78, 58);
             label3.TabIndex = 4;
             label3.Text = "Name";
             // 
@@ -58,9 +58,9 @@
             label1.BackColor = Color.Transparent;
             label1.Font = new Font("Sans Serif Collection", 10.1999989F, FontStyle.Bold);
             label1.ForeColor = SystemColors.ButtonHighlight;
-            label1.Location = new Point(165, 112);
+            label1.Location = new Point(189, 149);
             label1.Name = "label1";
-            label1.Size = new Size(78, 48);
+            label1.Size = new Size(91, 58);
             label1.TabIndex = 5;
             label1.Text = "Species";
             // 
@@ -70,9 +70,9 @@
             label2.BackColor = Color.Transparent;
             label2.Font = new Font("Sans Serif Collection", 10.1999989F, FontStyle.Bold);
             label2.ForeColor = SystemColors.ButtonHighlight;
-            label2.Location = new Point(165, 147);
+            label2.Location = new Point(189, 196);
             label2.Name = "label2";
-            label2.Size = new Size(109, 48);
+            label2.Size = new Size(129, 58);
             label2.TabIndex = 6;
             label2.Text = "Arrival Date";
             // 
@@ -82,53 +82,48 @@
             label4.BackColor = Color.Transparent;
             label4.Font = new Font("Sans Serif Collection", 10.1999989F, FontStyle.Bold);
             label4.ForeColor = SystemColors.ButtonHighlight;
-            label4.Location = new Point(165, 183);
+            label4.Location = new Point(189, 244);
             label4.Name = "label4";
-            label4.Size = new Size(55, 48);
+            label4.Size = new Size(67, 58);
             label4.TabIndex = 7;
             label4.Text = "Tank";
             // 
             // textBox1
             // 
-            textBox1.Location = new Point(252, 87);
-            textBox1.Margin = new Padding(3, 2, 3, 2);
+            textBox1.Location = new Point(288, 116);
             textBox1.Name = "textBox1";
-            textBox1.Size = new Size(243, 23);
+            textBox1.Size = new Size(277, 27);
             textBox1.TabIndex = 8;
             // 
             // textBox2
             // 
-            textBox2.Location = new Point(252, 119);
-            textBox2.Margin = new Padding(3, 2, 3, 2);
+            textBox2.Location = new Point(288, 159);
             textBox2.Name = "textBox2";
-            textBox2.Size = new Size(243, 23);
+            textBox2.Size = new Size(277, 27);
             textBox2.TabIndex = 9;
             // 
             // dateTimePicker1
             // 
-            dateTimePicker1.Location = new Point(276, 152);
-            dateTimePicker1.Margin = new Padding(3, 2, 3, 2);
+            dateTimePicker1.Location = new Point(315, 203);
             dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(219, 23);
+            dateTimePicker1.Size = new Size(250, 27);
             dateTimePicker1.TabIndex = 10;
             // 
             // comboBox1
             // 
             comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(252, 190);
-            comboBox1.Margin = new Padding(3, 2, 3, 2);
+            comboBox1.Location = new Point(288, 253);
             comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(243, 23);
+            comboBox1.Size = new Size(277, 28);
             comboBox1.TabIndex = 11;
             // 
             // button1
             // 
             button1.BackColor = Color.LightSteelBlue;
             button1.Font = new Font("Sans Serif Collection", 10.1999989F, FontStyle.Bold);
-            button1.Location = new Point(165, 229);
-            button1.Margin = new Padding(3, 2, 3, 2);
+            button1.Location = new Point(189, 305);
             button1.Name = "button1";
-            button1.Size = new Size(102, 39);
+            button1.Size = new Size(106, 52);
             button1.TabIndex = 12;
             button1.Text = "Save";
             button1.UseVisualStyleBackColor = false;
@@ -138,10 +133,9 @@
             // 
             button2.BackColor = Color.LightSteelBlue;
             button2.Font = new Font("Sans Serif Collection", 10.1999989F, FontStyle.Bold);
-            button2.Location = new Point(392, 229);
-            button2.Margin = new Padding(3, 2, 3, 2);
+            button2.Location = new Point(448, 305);
             button2.Name = "button2";
-            button2.Size = new Size(102, 39);
+            button2.Size = new Size(117, 52);
             button2.TabIndex = 13;
             button2.Text = "Cancel";
             button2.UseVisualStyleBackColor = false;
@@ -149,11 +143,11 @@
             // 
             // AddUpdateAnimalForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = Properties.Resources.animalAddUpdForm;
             BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(700, 338);
+            ClientSize = new Size(800, 451);
             Controls.Add(button2);
             Controls.Add(button1);
             Controls.Add(comboBox1);
@@ -164,7 +158,6 @@
             Controls.Add(label2);
             Controls.Add(label1);
             Controls.Add(label3);
-            Margin = new Padding(3, 2, 3, 2);
             Name = "AddUpdateAnimalForm";
             Text = "AddAnimalForm";
             ResumeLayout(false);

@@ -19,6 +19,11 @@ namespace AquariumController
                 .ToListAsync();
         }
 
+        public async Task<List<Booking>> GetAllBookings()
+        {
+            return await context.Bookings.Include(b => b.Employee).ToListAsync();
+        }
+
         public async Task AddBooking(Booking booking)
         {
             if (booking.BookingDate < DateTime.Now)

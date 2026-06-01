@@ -22,8 +22,22 @@ namespace AquariumForms
             comboBox1.DataSource = controller.GetAllTanks();
             comboBox1.DisplayMember = "ToString";
         }
+        public AddUpdateTankForm(Tank tank)
+        {
+            InitializeComponent();
+            editTank = tank;
+            TankController controller = new TankController();
+            comboBox1.DataSource = controller.GetAllTanks();
+            comboBox1.DisplayMember = "ToString";
+            textBox1.Text = editTank.Name;
+            textBox2.Text = editTank.CapacityLiters.ToString();
+            textBox3.Text = editTank.WaterTemperature.ToString();
+            comboBox1.SelectedItem = editTank.Exhibit;
+        }
+        public Tank Tank = null;
+        public Tank editTank = null;
 
-        private async void button1_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
             TankController controller = new TankController();
             string name = textBox1.Text;
@@ -52,15 +66,7 @@ namespace AquariumForms
             tank.WaterTemperature = temp;
             tank.ExhibitId = exhibitID;
             tank.Exhibit = exhibit;
-            try
-            {
-                await controller.AddTank(tank);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            DialogResult = DialogResult.OK;
+            Tank = tank;
         }
     }
 }
