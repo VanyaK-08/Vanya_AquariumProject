@@ -39,11 +39,6 @@ namespace AquariumController
             {
                 throw new ArgumentException("A tank with the same name already exists.");
             }
-            var checkExistingExhibit = await context.Tanks.Where(t => t.ExhibitId == tank.ExhibitId).ToListAsync();
-            if(checkExistingExhibit!=null)
-            {
-                throw new ArgumentException("This tank already belongs to an exhibit!");
-            }
             context.Tanks.Add(tank);
             await context.SaveChangesAsync();
         }
