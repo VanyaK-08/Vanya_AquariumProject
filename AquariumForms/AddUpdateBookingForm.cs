@@ -31,7 +31,7 @@ namespace AquariumForms
             dateTimePicker1.Value = editBooking.BookingDate;
         }
         private Userr currentEmployee { get; set; }
-        public Booking booking = null;
+        public Booking Booking = null;
         public Booking editBooking = null;
         private void button1_Click(object sender, EventArgs e)
         {
@@ -55,6 +55,7 @@ namespace AquariumForms
             {
                 newBooking.UserEmployeeId = currentEmployee.Id;
             }
+            Booking = newBooking;
             DialogResult = DialogResult.OK;
         }
 

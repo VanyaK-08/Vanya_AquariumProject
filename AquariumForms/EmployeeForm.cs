@@ -247,7 +247,7 @@ namespace AquariumForms
             {
                 try
                 {
-                    await bookingController.AddBooking(bookingForm.booking);
+                    await bookingController.AddBooking(bookingForm.Booking);
                     MessageBox.Show("Booking added successfully!");
                 }
                 catch (Exception ex)
@@ -307,7 +307,7 @@ namespace AquariumForms
                     {
                         try
                         {
-                            await bookingController.UpdateBooking(updated.booking);
+                            await bookingController.UpdateBooking(updated.Booking);
                             MessageBox.Show("Booking updated successfully!");
                         }
                         catch (Exception ex)
