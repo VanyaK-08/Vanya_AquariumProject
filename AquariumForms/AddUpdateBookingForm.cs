@@ -43,10 +43,18 @@ namespace AquariumForms
 
             Booking newBooking = new Booking
             {
-                BookingDate = dateTimePicker1.Value,
-                UserEmployeeId = currentEmployee.Id,
+                BookingDate = dateTimePicker1.Value
             };
-            booking = newBooking;
+
+            if (editBooking != null)
+            {
+                newBooking.UserEmployeeId = editBooking.UserEmployeeId;
+                newBooking.Id = editBooking.Id;
+            }
+            else
+            {
+                newBooking.UserEmployeeId = currentEmployee.Id;
+            }
             DialogResult = DialogResult.OK;
         }
 

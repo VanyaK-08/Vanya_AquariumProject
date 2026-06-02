@@ -21,5 +21,10 @@ namespace AquariumData.Entities
         public ICollection<Ticket> Tickets { get; set; } = new List<Ticket>();
 
         public string ImageUrl { get; set; } = string.Empty;
+
+        public override string ToString()
+        {
+            return $"{Title} - {Theme}";
+        }
     }
 }

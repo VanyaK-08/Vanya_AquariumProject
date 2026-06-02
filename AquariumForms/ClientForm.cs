@@ -1,5 +1,6 @@
 ﻿using AquariumController;
 using AquariumData.Entities;
+using System.Threading.Tasks;
 
 namespace AquariumForms
 {
@@ -14,6 +15,7 @@ namespace AquariumForms
             InitializeComponent();
             this.currentClient1 = currentClient;
         }
+        TicketController ticketController = new TicketController();
         private Userr currentClient1 { get; set; }
         private void button4_Click(object sender, EventArgs e)
         {
@@ -93,13 +95,19 @@ namespace AquariumForms
             this.Show();
         }
 
-        private void ClientForm_Load(object sender, EventArgs e)
+        private async void ClientForm_Load(object sender, EventArgs e)
         {
-            List<Ticket> tickets = currentClient1.Tickets.ToList();
+            List<Ticket> tickets = await ticketController.GetTicketsForClient(currentClient1);
             foreach (var item in tickets)
             {
-                listBox1.Items.Add(item.ToString());
+                listBox1.Items.Add(item);
             }
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            listBox1.Items.Clear();
+             ClientForm_Load(sender, e);
         }
     }
 }

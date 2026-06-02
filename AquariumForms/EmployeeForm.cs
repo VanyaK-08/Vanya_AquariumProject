@@ -16,22 +16,25 @@ namespace AquariumForms
             this.currentEmployee = curEmployee;
         }
         private Userr currentEmployee { get; set; }
-
+        AnimalController animalController = new AnimalController();
+        BookingController bookingController = new BookingController();
+        ExhibitController exhibitController = new ExhibitController();
+        TankController tankController = new TankController();
+        TicketController ticketController = new TicketController();
         private async void button1_Click(object sender, EventArgs e)
         {
             listBox1.Items.Clear();
-            AnimalController controller = new AnimalController();
-            var checkAnimals = await controller.GetAllAnimals();
+            var checkAnimals = await animalController.GetAllAnimals();
             if (checkAnimals.Count == 0)
             {
                 MessageBox.Show("No animals added at the moment.");
                 this.Show();
                 return;
             }
-            List<Animal> animals = await controller.GetAllAnimals();
+            List<Animal> animals = await animalController.GetAllAnimals();
             foreach (Animal animal in animals)
             {
-                listBox1.Items.Add(animal.ToString());
+                listBox1.Items.Add(animal);
             }
         }
 
@@ -39,13 +42,13 @@ namespace AquariumForms
         {
             this.Hide();
             AddUpdateAnimalForm animalForm = new AddUpdateAnimalForm();
-            AnimalController controller = new AnimalController();
             animalForm.ShowDialog();
             if (animalForm.DialogResult == DialogResult.OK)
             {
                 try
                 {
-                    await controller.AddAnimal(animalForm.Animal);
+                    await animalController.AddAnimal(animalForm.Animal);
+                    MessageBox.Show("Animal added successfully!");
                 }
                 catch (Exception ex)
                 {
@@ -55,25 +58,35 @@ namespace AquariumForms
             this.Show();
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private async void button3_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            ExhibitGallary exhibits = new ExhibitGallary();
-            exhibits.ShowDialog();
-            this.Show();
+            listBox1.Items.Clear();
+            var checkExhibits = await exhibitController.GetAllExhibits();
+            if (checkExhibits.Count == 0)
+            {
+                MessageBox.Show("No exhibits added at the moment.");
+                this.Show();
+                return;
+            }
+            List<Exhibit> exhibits = await exhibitController.GetAllExhibits();
+            foreach (Exhibit exhibit in exhibits)
+            {
+                listBox1.Items.Add(exhibit);
+            }
         }
+        
 
         private async void button4_Click(object sender, EventArgs e)
         {
             this.Hide();
             AddUpdateExhibitForm exhibits = new AddUpdateExhibitForm();
-            ExhibitController controller = new ExhibitController();
             exhibits.ShowDialog();
             if (exhibits.DialogResult == DialogResult.OK)
             {
                 try
                 {
-                    await controller.AddExhibit(exhibits.Exhibit);
+                    await exhibitController.AddExhibit(exhibits.Exhibit);
+                    MessageBox.Show("Exhibit added successfully!");
                 }
                 catch (Exception ex)
                 {
@@ -86,18 +99,17 @@ namespace AquariumForms
         private async void button5_Click(object sender, EventArgs e)
         {
             listBox1.Items.Clear();
-            TankController controller = new TankController();
-            var checkTanks = await controller.GetAllTanks();
+            var checkTanks = await tankController.GetAllTanks();
             if (checkTanks.Count == 0)
             {
                 MessageBox.Show("No tanks available for booking at the moment.");
                 this.Show();
                 return;
             }
-            List<Tank> tanks = await controller.GetAllTanks();
+            List<Tank> tanks = await tankController.GetAllTanks();
             foreach (Tank tank in tanks)
             {
-                listBox1.Items.Add(tank.ToString());
+                listBox1.Items.Add(tank);
             }
         }
 
@@ -105,18 +117,17 @@ namespace AquariumForms
         {
             this.Hide();
             AddUpdateTankForm tankForm = new AddUpdateTankForm();
-            TankController controller = new TankController();
             tankForm.ShowDialog();
             if (tankForm.DialogResult == DialogResult.OK)
             {
                 try
                 {
-                    await controller.AddTank(tankForm.Tank);
+                    await tankController.AddTank(tankForm.Tank);
+                    MessageBox.Show("Tank added successfully!");
                 }
                 catch (Exception ex)
                 {
-
-                    throw;
+                    MessageBox.Show(ex.Message);
                 }
             }
             this.Show();
@@ -131,13 +142,13 @@ namespace AquariumForms
                 try
                 {
                     AddUpdateAnimalForm updated = new AddUpdateAnimalForm(selectedAnimal);
-                    AnimalController controller = new AnimalController();
                     updated.ShowDialog();
                     if (updated.DialogResult == DialogResult.OK)
                     {
                         try
                         {
-                            await controller.UpdateAnimal(updated.Animal);
+                            await animalController.UpdateAnimal(updated.Animal);
+                            MessageBox.Show("Animal updated successfully!");
                         }
                         catch (Exception ex)
                         {
@@ -166,13 +177,13 @@ namespace AquariumForms
                 try
                 {
                     AddUpdateExhibitForm updated = new AddUpdateExhibitForm(selectedExhibit);
-                    ExhibitController controller = new ExhibitController();
                     updated.ShowDialog();
                     if (updated.DialogResult == DialogResult.OK)
                     {
                         try
                         {
-                            await controller.UpdateExhibit(updated.Exhibit);
+                            await exhibitController.UpdateExhibit(updated.Exhibit);
+                            MessageBox.Show("Exhibit updated successfully!");
                         }
                         catch (Exception ex)
                         {
@@ -201,13 +212,13 @@ namespace AquariumForms
                 try
                 {
                     AddUpdateTankForm updated = new AddUpdateTankForm(selectedTank);
-                    TankController controller = new TankController();
                     updated.ShowDialog();
                     if (updated.DialogResult == DialogResult.OK)
                     {
                         try
                         {
-                            await controller.UpdateTank(updated.Tank);
+                            await tankController.UpdateTank(updated.Tank);
+                            MessageBox.Show("Tank updated successfully!");
                         }
                         catch (Exception ex)
                         {
@@ -230,14 +241,14 @@ namespace AquariumForms
         private async void button13_Click(object sender, EventArgs e)
         {
             this.Hide();
-            AddUpdateBookingForm bookingForm = new AddUpdateBookingForm();
-            BookingController controller = new BookingController();
+            AddUpdateBookingForm bookingForm = new AddUpdateBookingForm(currentEmployee);
             bookingForm.ShowDialog();
             if (bookingForm.DialogResult == DialogResult.OK)
             {
                 try
                 {
-                    await controller.AddBooking(bookingForm.booking);
+                    await bookingController.AddBooking(bookingForm.booking);
+                    MessageBox.Show("Booking added successfully!");
                 }
                 catch (Exception ex)
                 {
@@ -247,10 +258,9 @@ namespace AquariumForms
             this.Show();
         }
 
-        private void button10_Click(object sender, EventArgs e)
+        private async void button10_Click(object sender, EventArgs e)
         {
-            BookingController controller = new BookingController();
-            List<Booking> checkBookings = controller.GetBookingForEmployee(currentEmployee).Result;
+            List<Booking> checkBookings = await bookingController.GetBookingForEmployee(currentEmployee);
             if (checkBookings.Count == 0)
             {
                 MessageBox.Show("No tickets available for booking at the moment.");
@@ -258,10 +268,10 @@ namespace AquariumForms
                 return;
             }
             listBox1.Items.Clear();
-            List<Booking> bookings = controller.GetBookingForEmployee(currentEmployee).Result;
+            List<Booking> bookings = await bookingController.GetBookingForEmployee(currentEmployee);
             foreach (Booking booking in bookings)
             {
-                listBox1.Items.Add(booking.ToString());
+                listBox1.Items.Add(booking);
             }
         }
 
@@ -292,13 +302,13 @@ namespace AquariumForms
                 try
                 {
                     AddUpdateBookingForm updated = new AddUpdateBookingForm(selectedBooking);
-                    BookingController controller = new BookingController();
                     updated.ShowDialog();
                     if (updated.DialogResult == DialogResult.OK)
                     {
                         try
                         {
-                            await controller.UpdateBooking(updated.booking);
+                            await bookingController.UpdateBooking(updated.booking);
+                            MessageBox.Show("Booking updated successfully!");
                         }
                         catch (Exception ex)
                         {
@@ -322,13 +332,13 @@ namespace AquariumForms
         {
             this.Hide();
             AddUpdateTicketsForm ticketsForm = new AddUpdateTicketsForm();
-            TicketController controller = new TicketController();
             ticketsForm.ShowDialog();
             if (ticketsForm.DialogResult == DialogResult.OK)
             {
                 try
                 {
-                    await controller.AddTicket(ticketsForm.Ticket);
+                    await ticketController.AddTicket(ticketsForm.Ticket);
+                    MessageBox.Show("Ticket added successfully!");
                 }
                 catch (Exception ex)
                 {
@@ -341,18 +351,17 @@ namespace AquariumForms
         private async void button15_Click(object sender, EventArgs e)
         {
             listBox1.Items.Clear();
-            TicketController controller = new TicketController();
-            var checkTickets = await controller.GetAllTickets();
+            var checkTickets = await ticketController.GetAllTickets();
             if (checkTickets.Count == 0)
             {
                 MessageBox.Show("No tickets available for booking at the moment.");
                 this.Show();
                 return;
             }
-            List<Ticket> tickets = controller.GetAllTickets().Result;
+            List<Ticket> tickets = await ticketController.GetAllTickets();
             foreach (Ticket ticket in tickets)
             {
-                listBox1.Items.Add(ticket.ToString());
+                listBox1.Items.Add(ticket);
             }
         }
 
@@ -365,13 +374,13 @@ namespace AquariumForms
                 try
                 {
                     AddUpdateTicketsForm updated = new AddUpdateTicketsForm(selectedTicket);
-                    TicketController controller = new TicketController();
                     updated.ShowDialog();
                     if (updated.DialogResult == DialogResult.OK)
                     {
                         try
                         {
-                            await controller.UpdateTicket(updated.Ticket);
+                            await ticketController.UpdateTicket(updated.Ticket);
+                            MessageBox.Show("Ticket updated successfully!");
                         }
                         catch (Exception ex)
                         {

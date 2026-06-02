@@ -21,8 +21,8 @@ namespace AquariumForms
             textBox2.Text = editAnimal.Species;
             dateTimePicker1.Value = editAnimal.ArrivalDate;
             
-            comboBox1.DataSource = tankcontroller.GetAllTanks();
-            comboBox1.DisplayMember = "Name";
+            
+            comboBox1.DisplayMember = "ToString";
             comboBox1.SelectedItem = editAnimal.Tank;
         }
         public Animal Animal = null;
@@ -56,11 +56,17 @@ namespace AquariumForms
                 return;
             }
             Animal animal = new Animal();
+
+            if (editAnimal != null)
+            {
+                animal.Id = editAnimal.Id;
+            }
+
             animal.Name = name;
             animal.Species = species;
             animal.ArrivalDate = arrivalDate;
             animal.TankId = tankId;
-            animal.Tank = tank;
+
             Animal = animal;
             DialogResult = DialogResult.OK;
         }
@@ -72,8 +78,7 @@ namespace AquariumForms
 
         private async void AddUpdateAnimalForm_Load(object sender, EventArgs e)
         {
-            TankController controller = new TankController();
-            comboBox1.DataSource = await controller.GetAllTanks();
+            comboBox1.DataSource = await tankcontroller.GetAllTanks();
         }
     }
 }

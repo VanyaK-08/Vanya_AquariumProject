@@ -23,10 +23,10 @@ namespace AquariumForms
             editTicket = selectedTicket;
 
 
-            comboBox1.DisplayMember = "Id";
+            comboBox1.DisplayMember = "ToString";
 
 
-            comboBox2.DisplayMember = "Title";
+            comboBox2.DisplayMember = "ToString";
             numericUpDown1.Value = editTicket.Price;
             dateTimePicker1.Value = editTicket.VisitDate;
             comboBox1.SelectedItem = editTicket.Booking;
@@ -74,6 +74,10 @@ namespace AquariumForms
                 BookingId = booking.Id,
                 ExhibitId = exhibit.Id
             };
+            if (editTicket != null)
+            {
+                ticket.Id = editTicket.Id;
+            }
             Ticket = ticket;
             DialogResult = DialogResult.OK; 
         }

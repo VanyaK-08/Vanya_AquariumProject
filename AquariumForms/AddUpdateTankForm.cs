@@ -19,7 +19,7 @@ namespace AquariumForms
         {
             InitializeComponent();
 
-            comboBox1.DisplayMember = "Title";
+            comboBox1.DisplayMember = "ToString";
         }
         TankController controller = new TankController();
         ExhibitController exhibitController = new ExhibitController();
@@ -27,8 +27,8 @@ namespace AquariumForms
         {
             InitializeComponent();
             editTank = tank;
-            
-            comboBox1.DisplayMember = "Title";
+
+            comboBox1.DisplayMember = "ToString";
             textBox1.Text = editTank.Name;
             textBox2.Text = editTank.CapacityLiters.ToString();
             textBox3.Text = editTank.WaterTemperature.ToString();
@@ -43,7 +43,13 @@ namespace AquariumForms
             string name = textBox1.Text;
             int waterCpacity = int.Parse(textBox2.Text);
             decimal temp = decimal.Parse(textBox3.Text);
-            Exhibit exhibit = (Exhibit)comboBox1.SelectedItem;
+            Exhibit exhibit = comboBox1.SelectedItem as Exhibit;
+
+            if (exhibit == null)
+            {
+                MessageBox.Show("Please select an exhibit.");
+                return;
+            }
             int exhibitID = exhibit.Id;
             if (string.IsNullOrEmpty(name) || string.IsNullOrWhiteSpace(name))
             {
@@ -65,7 +71,10 @@ namespace AquariumForms
             tank.CapacityLiters = waterCpacity;
             tank.WaterTemperature = temp;
             tank.ExhibitId = exhibitID;
-            tank.Exhibit = exhibit;
+            if (editTank != null)
+            {
+                tank.Id = editTank.Id;
+            }
             Tank = tank;
             DialogResult = DialogResult.OK;
         }

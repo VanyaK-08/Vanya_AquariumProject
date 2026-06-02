@@ -59,6 +59,11 @@ namespace AquariumForms
             FileDialog fileDialog = new OpenFileDialog();
             fileDialog.ShowDialog();
             ex.ImageUrl = fileDialog.FileName;
+
+            if (editExhibit != null)
+            {
+                ex.Id = editExhibit.Id;
+            }
             Exhibit = ex;
             DialogResult = DialogResult.OK;
         }
@@ -66,7 +71,6 @@ namespace AquariumForms
         private void button3_Click(object sender, EventArgs e)
         {
             pictureBox1.Image = Image.FromFile(editExhibit.ImageUrl);
-            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
         }
 
         private void button2_Click(object sender, EventArgs e)

@@ -98,5 +98,16 @@ namespace AquariumController
         {
             return await context.Tickets.Include(t => t.Exhibit).ToListAsync();
         }
+
+        public async Task<List<Ticket>> GetTicketsForClient(Userr client)
+        {
+            return await context.Tickets
+                .Include(t => t.Exhibit)
+                .ThenInclude(e => e.Tanks)
+                .Include(t => t.Booking)
+                .ThenInclude(b => b.Employee)
+                .Where(t => t.ClientId == client.Id)
+                .ToListAsync();
+        }
     }
 }
