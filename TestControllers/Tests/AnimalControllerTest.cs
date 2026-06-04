@@ -112,5 +112,138 @@ namespace TestControllers.Tests
             };
             Assert.ThrowsAsync<ArgumentException>(async () => await controller.AddAnimal(animal2));
         }
+        [Test]
+        public async Task UpdateAnimal_NonExistentAnimal_ThrowsException()
+        {
+            Animal animal = new Animal
+            {
+                Id = 999,
+                Name = "Nemo",
+                Species = "Clownfish",
+                ArrivalDate = DateTime.Parse("2026-01-01"),
+                TankId = 1
+            };
+            Assert.ThrowsAsync<ArgumentException>(async () => await controller.UpdateAnimal(animal));
+        }
+        [Test]
+        public async Task UpdateAnimal_SuccessfullyUpdateAnimal()
+        {
+            Animal animal = new Animal
+            {
+                Name = "Nemo",
+                Species = "Clownfish",
+                ArrivalDate = DateTime.Parse("2026-01-01"),
+                TankId = 1
+            };
+            await controller.AddAnimal(animal);
+            var animals = await controller.GetAllAnimals();
+            var addedAnimal = animals.FirstOrDefault();
+            Assert.IsNotNull(addedAnimal);
+            addedAnimal.Name = "Dory";
+            addedAnimal.Species = "Blue Tang";
+            await controller.UpdateAnimal(addedAnimal);
+            var updatedAnimals = await controller.GetAllAnimals();
+            var updatedAnimal = updatedAnimals.FirstOrDefault();
+            Assert.IsNotNull(updatedAnimal);
+            Assert.AreEqual("Dory", updatedAnimal.Name);
+            Assert.AreEqual("Blue Tang", updatedAnimal.Species);
+        }
+        [Test]
+        public async Task UpdateAnimal_InvalidName_ThrowsException()
+        {
+            Animal animal = new Animal
+            {
+                Name = "Nemo",
+                Species = "Clownfish",
+                ArrivalDate = DateTime.Parse("2026-01-01"),
+                TankId = 1
+            };
+            await controller.AddAnimal(animal);
+            var animals = await controller.GetAllAnimals();
+            var addedAnimal = animals.FirstOrDefault();
+            Assert.IsNotNull(addedAnimal);
+            addedAnimal.Name = "";
+            Assert.ThrowsAsync<ArgumentException>(async () => await controller.UpdateAnimal(addedAnimal));
+        }
+        [Test]
+        public async Task UpdateAnimal_InvalidSpecies_ThrowsException()
+        {
+            Animal animal = new Animal
+            {
+                Name = "Nemo",
+                Species = "Clownfish",
+                ArrivalDate = DateTime.Parse("2026-01-01"),
+                TankId = 1
+            };
+            await controller.AddAnimal(animal);
+            var animals = await controller.GetAllAnimals();
+            var addedAnimal = animals.FirstOrDefault();
+            Assert.IsNotNull(addedAnimal);
+            addedAnimal.Species = "";
+            Assert.ThrowsAsync<ArgumentException>(async () => await controller.UpdateAnimal(addedAnimal));
+        }
+
+        [Test]
+        public async Task UpdateAnimal_FutureArrivalDate_ThrowsException()
+        {
+            Animal animal = new Animal
+            {
+                Name = "Nemo",
+                Species = "Clownfish",
+                ArrivalDate = DateTime.Parse("2026-01-01"),
+                TankId = 1
+            };
+            await controller.AddAnimal(animal);
+            var animals = await controller.GetAllAnimals();
+            var addedAnimal = animals.FirstOrDefault();
+            Assert.IsNotNull(addedAnimal);
+            addedAnimal.ArrivalDate = DateTime.Parse("2027-01-01");
+            Assert.ThrowsAsync<ArgumentException>(async () => await controller.UpdateAnimal(addedAnimal));
+        }
+        [Test]
+        public async Task UpdateAnimal_NonExistentTank_ThrowsException()
+        {
+            Animal animal = new Animal
+            {
+                Name = "Nemo",
+                Species = "Clownfish",
+                ArrivalDate = DateTime.Parse("2026-01-01"),
+                TankId = 1
+            };
+            await controller.AddAnimal(animal);
+            var animals = await controller.GetAllAnimals();
+            var addedAnimal = animals.FirstOrDefault();
+            Assert.IsNotNull(addedAnimal);
+            addedAnimal.TankId = 999;
+            Assert.ThrowsAsync<ArgumentException>(async () => await controller.UpdateAnimal(addedAnimal));
+        }
+        [Test]
+        public async Task UpdateAnimal_DuplicateAnimal_ThrowsException()
+        {
+            Animal animal1 = new Animal
+            {
+                Name = "Nemo",
+                Species = "Clownfish",
+                ArrivalDate = DateTime.Parse("2026-01-01"),
+                TankId = 1
+            };
+            await controller.AddAnimal(animal1);
+            Animal animal2 = new Animal
+            {
+                Name = "Dory",
+                Species = "Blue Tang",
+                ArrivalDate = DateTime.Parse("2026-01-01"),
+                TankId = 1
+            };
+            await controller.AddAnimal(animal2);
+            var animals = await controller.GetAllAnimals();
+            var addedAnimal1 = animals.FirstOrDefault(a => a.Name == "Nemo");
+            var addedAnimal2 = animals.FirstOrDefault(a => a.Name == "Dory");
+            Assert.IsNotNull(addedAnimal1);
+            Assert.IsNotNull(addedAnimal2);
+            addedAnimal2.Name = "Nemo";
+            addedAnimal2.Species = "Clownfish";
+            Assert.ThrowsAsync<ArgumentException>(async () => await controller.UpdateAnimal(addedAnimal2));
+        }
     }
 }
