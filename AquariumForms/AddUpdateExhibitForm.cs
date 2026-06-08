@@ -87,7 +87,6 @@ namespace AquariumForms
 
         private void button3_Click(object sender, EventArgs e)
         {
-            pictureBox1.Image = Image.FromFile(editExhibit.ImageUrl);
         }
 
         private void button2_Click(object sender, EventArgs e)

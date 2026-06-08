@@ -37,7 +37,6 @@
             button1 = new Button();
             button2 = new Button();
             pictureBox1 = new PictureBox();
-            button3 = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -71,7 +70,7 @@
             label2.BackColor = Color.Transparent;
             label2.Font = new Font("Sans Serif Collection", 10.1999989F, FontStyle.Bold);
             label2.ForeColor = SystemColors.ButtonHighlight;
-            label2.Location = new Point(113, 184);
+            label2.Location = new Point(113, 204);
             label2.Name = "label2";
             label2.Size = new Size(126, 58);
             label2.TabIndex = 6;
@@ -96,7 +95,7 @@
             richTextBox1.Location = new Point(245, 184);
             richTextBox1.MaxLength = 1000;
             richTextBox1.Name = "richTextBox1";
-            richTextBox1.Size = new Size(245, 49);
+            richTextBox1.Size = new Size(245, 87);
             richTextBox1.TabIndex = 9;
             richTextBox1.Text = "";
             // 
@@ -104,7 +103,7 @@
             // 
             button1.BackColor = Color.LightSteelBlue;
             button1.Font = new Font("Sans Serif Collection", 10.1999989F, FontStyle.Bold);
-            button1.Location = new Point(113, 341);
+            button1.Location = new Point(113, 310);
             button1.Name = "button1";
             button1.Size = new Size(117, 52);
             button1.TabIndex = 13;
@@ -116,7 +115,7 @@
             // 
             button2.BackColor = Color.LightSteelBlue;
             button2.Font = new Font("Sans Serif Collection", 10.1999989F, FontStyle.Bold);
-            button2.Location = new Point(373, 341);
+            button2.Location = new Point(373, 310);
             button2.Name = "button2";
             button2.Size = new Size(117, 52);
             button2.TabIndex = 14;
@@ -133,18 +132,6 @@
             pictureBox1.TabIndex = 15;
             pictureBox1.TabStop = false;
             // 
-            // button3
-            // 
-            button3.BackColor = Color.LightSteelBlue;
-            button3.Font = new Font("Sans Serif Collection", 7.799999F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            button3.Location = new Point(113, 257);
-            button3.Name = "button3";
-            button3.Size = new Size(151, 43);
-            button3.TabIndex = 16;
-            button3.Text = "Show image...";
-            button3.UseVisualStyleBackColor = false;
-            button3.Click += button3_Click;
-            // 
             // AddUpdateExhibitForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -152,7 +139,6 @@
             BackgroundImage = Properties.Resources.exhibitAddUpdForm;
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(800, 451);
-            Controls.Add(button3);
             Controls.Add(pictureBox1);
             Controls.Add(button2);
             Controls.Add(button1);
@@ -180,6 +166,5 @@
         private Button button1;
         private Button button2;
         private PictureBox pictureBox1;
-        private Button button3;
     }
 }
