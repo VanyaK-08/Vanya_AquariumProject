@@ -64,6 +64,7 @@
             Controls.Add(panel1);
             Name = "ExhibitGallary";
             Text = "ExhibitGallary";
+            Load += ExhibitGallary_Load;
             ResumeLayout(false);
         }
 

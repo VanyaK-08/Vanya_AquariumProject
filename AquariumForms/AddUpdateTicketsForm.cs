@@ -44,26 +44,51 @@ namespace AquariumForms
             if (price < 0)
             {
                 MessageBox.Show("Price cannot be negative.");
+                DialogResult = DialogResult.OK;
+                numericUpDown1.Value = 10;
+                dateTimePicker1.Value = DateTime.Now;
+                comboBox1.SelectedIndex = -1;
+                comboBox2.SelectedIndex = -1;
                 return;
             }
             if (visitDate < DateTime.Now)
             {
                 MessageBox.Show("Visit date cannot be in the past.");
+                DialogResult = DialogResult.OK;
+                numericUpDown1.Value = 10;
+                dateTimePicker1.Value = DateTime.Now;
+                comboBox1.SelectedIndex = -1;
+                comboBox2.SelectedIndex = -1;
                 return;
             }
             if (booking == null)
             {
                 MessageBox.Show("Please select a booking.");
+                DialogResult = DialogResult.OK;
+                numericUpDown1.Value = 10;
+                dateTimePicker1.Value = DateTime.Now;
+                comboBox1.SelectedIndex = -1;
+                comboBox2.SelectedIndex = -1;
                 return;
             }
             if (exhibit == null)
             {
                 MessageBox.Show("Please select an exhibit.");
+                DialogResult = DialogResult.OK;
+                numericUpDown1.Value = 10;
+                dateTimePicker1.Value = DateTime.Now;
+                comboBox1.SelectedIndex = -1;
+                comboBox2.SelectedIndex = -1;
                 return;
             }
             if (booking.Id == 0 || exhibit.Id == 0)
             {
                 MessageBox.Show("Error.");
+                DialogResult = DialogResult.OK;
+                numericUpDown1.Value = 10;
+                dateTimePicker1.Value = DateTime.Now;
+                comboBox1.SelectedIndex = -1;
+                comboBox2.SelectedIndex = -1;
                 return;
             }
             TicketController controller = new TicketController();
@@ -79,7 +104,11 @@ namespace AquariumForms
                 ticket.Id = editTicket.Id;
             }
             Ticket = ticket;
-            DialogResult = DialogResult.OK; 
+            DialogResult = DialogResult.OK;
+            numericUpDown1.Value = 10;
+            dateTimePicker1.Value = DateTime.Now;
+            comboBox1.SelectedIndex = -1;
+            comboBox2.SelectedIndex = -1;
         }
 
         private async void AddUpdateTicketsForm_Load(object sender, EventArgs e)

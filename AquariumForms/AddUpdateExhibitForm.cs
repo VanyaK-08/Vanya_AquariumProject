@@ -1,15 +1,4 @@
-﻿using AquariumController;
-using AquariumData.Entities;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+﻿using AquariumData.Entities;
 
 namespace AquariumForms
 {
@@ -40,16 +29,41 @@ namespace AquariumForms
             if (string.IsNullOrEmpty(title) || string.IsNullOrWhiteSpace(title))
             {
                 MessageBox.Show("Title cannot be empty!");
+                textBox1.Clear();
+                textBox2.Clear();
+                richTextBox1.Clear();
+                return;
+            }
+            if (title.Any(char.IsDigit))
+            {
+                MessageBox.Show("Title cannot contain numbers!");
+                textBox1.Clear();
+                textBox2.Clear();
+                richTextBox1.Clear();
                 return;
             }
             if (string.IsNullOrEmpty(theme) || string.IsNullOrWhiteSpace(theme))
             {
                 MessageBox.Show("Theme cannot be empty!");
+                textBox1.Clear();
+                textBox2.Clear();
+                richTextBox1.Clear();
+                return;
+            }
+            if (theme.Any(char.IsDigit))
+            {
+                MessageBox.Show("Theme cannot contain numbers!");
+                textBox1.Clear();
+                textBox2.Clear();
+                richTextBox1.Clear();
                 return;
             }
             if (string.IsNullOrEmpty(description) || string.IsNullOrWhiteSpace(description))
             {
                 MessageBox.Show("Description cannot be empty!");
+                textBox1.Clear();
+                textBox2.Clear();
+                richTextBox1.Clear();
                 return;
             }
             Exhibit ex = new Exhibit();
@@ -66,6 +80,9 @@ namespace AquariumForms
             }
             Exhibit = ex;
             DialogResult = DialogResult.OK;
+            textBox1.Clear();
+            textBox2.Clear();
+            richTextBox1.Clear();
         }
 
         private void button3_Click(object sender, EventArgs e)

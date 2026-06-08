@@ -290,6 +290,7 @@
             Controls.Add(button1);
             Name = "EmployeeForm";
             Text = "EmployeeForm";
+            Load += EmployeeForm_Load;
             ResumeLayout(false);
         }
 

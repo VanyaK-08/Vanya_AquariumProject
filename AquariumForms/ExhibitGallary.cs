@@ -20,6 +20,21 @@ namespace AquariumForms
 
         private async void panel1_Paint(object sender, PaintEventArgs e)
         {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            DialogResult = DialogResult.OK;
+        }
+
+        private async void ExhibitGallary_Load(object sender, EventArgs e)
+        {
+            await LoadExhibits();
+        }
+
+        private async Task LoadExhibits()
+        {
             panel1.Controls.Clear();
 
             ExhibitController exhibitController = new ExhibitController();
@@ -33,19 +48,18 @@ namespace AquariumForms
                     Height = 100,
                     Padding = new Padding(5)
                 };
+
                 var pictureBox = new PictureBox
                 {
                     Image = Image.FromFile(exhibit.ImageUrl),
-                    Size = new Size(80, 100),
+                    Size = new Size(100, 130),
                     Location = new Point(5, 10),
                     SizeMode = PictureBoxSizeMode.StretchImage
                 };
-            }
-        }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            DialogResult = DialogResult.OK;
+                panel.Controls.Add(pictureBox);
+                panel1.Controls.Add(panel);
+            }
         }
     }
 }

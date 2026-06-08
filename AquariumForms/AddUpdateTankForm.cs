@@ -1,15 +1,5 @@
 ﻿using AquariumController;
-using AquariumData;
 using AquariumData.Entities;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace AquariumForms
 {
@@ -48,22 +38,47 @@ namespace AquariumForms
             if (exhibit == null)
             {
                 MessageBox.Show("Please select an exhibit.");
+                textBox1.Clear();
+                textBox2.Clear();
+                textBox3.Clear();
+                comboBox1.SelectedIndex = -1;
                 return;
             }
             int exhibitID = exhibit.Id;
             if (string.IsNullOrEmpty(name) || string.IsNullOrWhiteSpace(name))
             {
                 MessageBox.Show("Name cannot be empty!");
+                textBox1.Clear();
+                textBox2.Clear();
+                textBox3.Clear();
+                comboBox1.SelectedIndex = -1;
+                return;
+            }
+            if (name.Any(char.IsDigit))
+            {
+                MessageBox.Show("Name cannot contain numbers!");
+                textBox1.Clear();
+                textBox2.Clear();
+                textBox3.Clear();
+                comboBox1.SelectedIndex = -1;
                 return;
             }
             if (waterCpacity < 0)
             {
                 MessageBox.Show("Water capacity cannot be below 0!");
+                textBox1.Clear();
+                textBox2.Clear();
+                textBox3.Clear();
+                comboBox1.SelectedIndex = -1;
                 return;
             }
             if (exhibitID == 0)
             {
                 MessageBox.Show("Error.");
+                textBox1.Clear();
+                textBox2.Clear();
+                textBox3.Clear();
+                comboBox1.SelectedIndex = -1;
                 return;
             }
             Tank tank = new Tank();
@@ -77,6 +92,10 @@ namespace AquariumForms
             }
             Tank = tank;
             DialogResult = DialogResult.OK;
+            textBox1.Clear();
+            textBox2.Clear();
+            textBox3.Clear();
+            comboBox1.SelectedIndex = -1;
         }
 
         private async void AddUpdateTankForm_Load(object sender, EventArgs e)

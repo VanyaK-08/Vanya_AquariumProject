@@ -8,7 +8,7 @@ namespace AquariumForms
         public AddUpdateAnimalForm()
         {
             InitializeComponent();
-            
+
             comboBox1.DisplayMember = "ToString";
         }
         TankController tankcontroller = new TankController();
@@ -20,8 +20,8 @@ namespace AquariumForms
             textBox1.Text = editAnimal.Name;
             textBox2.Text = editAnimal.Species;
             dateTimePicker1.Value = editAnimal.ArrivalDate;
-            
-            
+
+
             comboBox1.DisplayMember = "ToString";
             comboBox1.SelectedItem = editAnimal.Tank;
         }
@@ -29,7 +29,6 @@ namespace AquariumForms
         public Animal editAnimal = null;
         private void button1_Click(object sender, EventArgs e)
         {
-            
             string name = textBox1.Text;
             string species = textBox2.Text;
             DateTime arrivalDate = dateTimePicker1.Value;
@@ -38,21 +37,67 @@ namespace AquariumForms
             if (string.IsNullOrEmpty(name) || string.IsNullOrWhiteSpace(name))
             {
                 MessageBox.Show("Name cannot be empty!");
+
+                textBox1.Clear();
+                textBox2.Clear();
+                dateTimePicker1.Value = DateTime.Now;
+                comboBox1.SelectedIndex = -1;
+
+                return;
+            }
+            if (name.Any(char.IsDigit))
+            {
+                MessageBox.Show("Name cannot contain numbers!");
+
+                textBox1.Clear();
+                textBox2.Clear();
+                dateTimePicker1.Value = DateTime.Now;
+                comboBox1.SelectedIndex = -1;
+
                 return;
             }
             if (string.IsNullOrEmpty(species) || string.IsNullOrWhiteSpace(species))
             {
                 MessageBox.Show("Species cannot be empty!");
+
+                textBox1.Clear();
+                textBox2.Clear();
+                dateTimePicker1.Value = DateTime.Now;
+                comboBox1.SelectedIndex = -1;
+
+                return;
+            }
+            if (species.Any(char.IsDigit))
+            {
+                MessageBox.Show("Species cannot contain numbers!");
+
+                textBox1.Clear();
+                textBox2.Clear();
+                dateTimePicker1.Value = DateTime.Now;
+                comboBox1.SelectedIndex = -1;
+
                 return;
             }
             if (arrivalDate > DateTime.Now)
             {
                 MessageBox.Show("Arrival date cannot be in the future.");
+
+                textBox1.Clear();
+                textBox2.Clear();
+                dateTimePicker1.Value = DateTime.Now;
+                comboBox1.SelectedIndex = -1;
+
                 return;
             }
             if (tankId == 0)
             {
                 MessageBox.Show("Error.");
+
+                textBox1.Clear();
+                textBox2.Clear();
+                dateTimePicker1.Value = DateTime.Now;
+                comboBox1.SelectedIndex = -1;
+
                 return;
             }
             Animal animal = new Animal();
@@ -68,7 +113,13 @@ namespace AquariumForms
             animal.TankId = tankId;
 
             Animal = animal;
+
             DialogResult = DialogResult.OK;
+
+            textBox1.Clear();
+            textBox2.Clear();
+            dateTimePicker1.Value = DateTime.Now;
+            comboBox1.SelectedIndex = -1;
         }
 
         private void button2_Click(object sender, EventArgs e)

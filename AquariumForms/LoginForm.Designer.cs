@@ -84,6 +84,7 @@ namespace AquariumForms
             textBox3.Name = "textBox3";
             textBox3.Size = new Size(282, 27);
             textBox3.TabIndex = 4;
+            textBox3.UseSystemPasswordChar = true;
             // 
             // label3
             // 

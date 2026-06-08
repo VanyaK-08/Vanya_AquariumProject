@@ -29,6 +29,10 @@ namespace AquariumForms
             if (user == null)
             {
                 MessageBox.Show("Invalid credentials. Please try again.");
+                textBox1.Clear();
+                textBox2.Clear();
+                textBox3.Clear();
+                return;
             }
             this.Hide();
             if (user.Role == Role.Employee)

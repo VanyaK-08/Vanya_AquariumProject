@@ -28,7 +28,6 @@ namespace AquariumForms
             if (checkAnimals.Count == 0)
             {
                 MessageBox.Show("No animals added at the moment.");
-                this.Show();
                 return;
             }
             List<Animal> animals = await animalController.GetAllAnimals();
@@ -65,7 +64,6 @@ namespace AquariumForms
             if (checkExhibits.Count == 0)
             {
                 MessageBox.Show("No exhibits added at the moment.");
-                this.Show();
                 return;
             }
             List<Exhibit> exhibits = await exhibitController.GetAllExhibits();
@@ -74,7 +72,7 @@ namespace AquariumForms
                 listBox1.Items.Add(exhibit);
             }
         }
-        
+
 
         private async void button4_Click(object sender, EventArgs e)
         {
@@ -103,7 +101,6 @@ namespace AquariumForms
             if (checkTanks.Count == 0)
             {
                 MessageBox.Show("No tanks available for booking at the moment.");
-                this.Show();
                 return;
             }
             List<Tank> tanks = await tankController.GetAllTanks();
@@ -264,7 +261,6 @@ namespace AquariumForms
             if (checkBookings.Count == 0)
             {
                 MessageBox.Show("No tickets available for booking at the moment.");
-                this.Show();
                 return;
             }
             listBox1.Items.Clear();
@@ -355,7 +351,6 @@ namespace AquariumForms
             if (checkTickets.Count == 0)
             {
                 MessageBox.Show("No tickets available for booking at the moment.");
-                this.Show();
                 return;
             }
             List<Ticket> tickets = await ticketController.GetAllTickets();
@@ -398,6 +393,11 @@ namespace AquariumForms
                 MessageBox.Show("Please select a ticket to view details.");
             }
             this.Show();
+        }
+
+        private void EmployeeForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

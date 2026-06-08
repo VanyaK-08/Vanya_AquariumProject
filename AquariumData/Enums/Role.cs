@@ -12,3 +12,4 @@ namespace AquariumData.Enums
         Employee
     }
 }
+

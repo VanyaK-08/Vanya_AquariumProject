@@ -111,6 +111,7 @@
             textBox3.Name = "textBox3";
             textBox3.Size = new Size(199, 27);
             textBox3.TabIndex = 11;
+            textBox3.UseSystemPasswordChar = true;
             // 
             // comboBox1
             // 
@@ -166,6 +167,7 @@
             textBox4.Name = "textBox4";
             textBox4.Size = new Size(199, 27);
             textBox4.TabIndex = 16;
+            textBox4.UseSystemPasswordChar = true;
             // 
             // RegisterForm
             // 
