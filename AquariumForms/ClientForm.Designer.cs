@@ -34,6 +34,7 @@
             button4 = new Button();
             button1 = new Button();
             button5 = new Button();
+            button6 = new Button();
             SuspendLayout();
             // 
             // listBox1
@@ -113,6 +114,19 @@
             button5.UseVisualStyleBackColor = false;
             button5.Click += button5_Click;
             // 
+            // button6
+            // 
+            button6.BackColor = Color.LightSteelBlue;
+            button6.Font = new Font("Sans Serif Collection", 7.799999F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            button6.ForeColor = Color.Black;
+            button6.Location = new Point(691, 397);
+            button6.Name = "button6";
+            button6.Size = new Size(97, 41);
+            button6.TabIndex = 19;
+            button6.Text = "Log Out";
+            button6.UseVisualStyleBackColor = false;
+            button6.Click += button6_Click;
+            // 
             // ClientForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -120,6 +134,7 @@
             BackgroundImage = Properties.Resources.client;
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(800, 450);
+            Controls.Add(button6);
             Controls.Add(button5);
             Controls.Add(button4);
             Controls.Add(button3);
@@ -140,5 +155,6 @@
         private Button button4;
         private Button button1;
         private Button button5;
+        private Button button6;
     }
 }

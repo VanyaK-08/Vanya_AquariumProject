@@ -91,7 +91,6 @@ namespace AquariumForms
                 comboBox2.SelectedIndex = -1;
                 return;
             }
-            TicketController controller = new TicketController();
             Ticket ticket = new Ticket
             {
                 Price = price,
@@ -115,6 +114,11 @@ namespace AquariumForms
         {
             comboBox1.DataSource = await bookingcontroller.GetAllBookings();
             comboBox2.DataSource = await exhibitController.GetAllExhibits();
+
+            numericUpDown1.Value = 10;
+            dateTimePicker1.Value = DateTime.Now;
+            comboBox1.SelectedIndex = -1;
+            comboBox2.SelectedIndex = -1;
         }
 
         private void button2_Click(object sender, EventArgs e)

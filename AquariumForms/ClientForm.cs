@@ -107,7 +107,12 @@ namespace AquariumForms
         private void button5_Click(object sender, EventArgs e)
         {
             listBox1.Items.Clear();
-             ClientForm_Load(sender, e);
+            ClientForm_Load(sender, e);
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

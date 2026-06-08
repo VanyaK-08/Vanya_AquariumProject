@@ -29,7 +29,7 @@ namespace AquariumForms
             user.Username = textBox1.Text;
             user.Email = textBox2.Text;
             user.Password = textBox3.Text;
-            user.Role = (Role)comboBox1.SelectedItem;
+            user.Role = (Role)comboBox1.SelectedIndex;
             if (string.IsNullOrWhiteSpace(textBox1.Text) || string.IsNullOrWhiteSpace(textBox2.Text))
             {
                 MessageBox.Show("Enter all the information required!");

@@ -327,19 +327,26 @@ namespace AquariumForms
         private async void button14_Click(object sender, EventArgs e)
         {
             this.Hide();
-            AddUpdateTicketsForm ticketsForm = new AddUpdateTicketsForm();
-            ticketsForm.ShowDialog();
-            if (ticketsForm.DialogResult == DialogResult.OK)
+            try
             {
-                try
+                AddUpdateTicketsForm ticketsForm = new AddUpdateTicketsForm();
+                ticketsForm.ShowDialog();
+                if (ticketsForm.DialogResult == DialogResult.OK)
                 {
-                    await ticketController.AddTicket(ticketsForm.Ticket);
-                    MessageBox.Show("Ticket added successfully!");
+                    try
+                    {
+                        await ticketController.AddTicket(ticketsForm.Ticket);
+                        MessageBox.Show("Ticket added successfully!");
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
                 }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
             this.Show();
         }
@@ -398,6 +405,11 @@ namespace AquariumForms
         private void EmployeeForm_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void button17_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

@@ -45,6 +45,7 @@
             button14 = new Button();
             button15 = new Button();
             button16 = new Button();
+            button17 = new Button();
             SuspendLayout();
             // 
             // button1
@@ -52,7 +53,7 @@
             button1.BackColor = Color.LightSteelBlue;
             button1.Font = new Font("Sans Serif Collection", 9F, FontStyle.Bold, GraphicsUnit.Point, 204);
             button1.ForeColor = SystemColors.ControlText;
-            button1.Location = new Point(391, 35);
+            button1.Location = new Point(391, 79);
             button1.Name = "button1";
             button1.Size = new Size(154, 43);
             button1.TabIndex = 0;
@@ -64,7 +65,7 @@
             // 
             listBox1.BackColor = Color.AliceBlue;
             listBox1.FormattingEnabled = true;
-            listBox1.Location = new Point(11, 35);
+            listBox1.Location = new Point(11, 30);
             listBox1.Name = "listBox1";
             listBox1.Size = new Size(374, 384);
             listBox1.TabIndex = 1;
@@ -74,7 +75,7 @@
             button2.BackColor = Color.LightSteelBlue;
             button2.Font = new Font("Sans Serif Collection", 9F, FontStyle.Bold);
             button2.ForeColor = SystemColors.ControlText;
-            button2.Location = new Point(391, 82);
+            button2.Location = new Point(391, 30);
             button2.Name = "button2";
             button2.Size = new Size(154, 43);
             button2.TabIndex = 2;
@@ -87,7 +88,7 @@
             button3.BackColor = Color.LightSteelBlue;
             button3.Font = new Font("Sans Serif Collection", 9F, FontStyle.Bold);
             button3.ForeColor = SystemColors.ControlText;
-            button3.Location = new Point(391, 130);
+            button3.Location = new Point(391, 226);
             button3.Name = "button3";
             button3.Size = new Size(154, 43);
             button3.TabIndex = 3;
@@ -100,7 +101,7 @@
             button4.BackColor = Color.LightSteelBlue;
             button4.Font = new Font("Sans Serif Collection", 9F, FontStyle.Bold);
             button4.ForeColor = SystemColors.ControlText;
-            button4.Location = new Point(391, 178);
+            button4.Location = new Point(391, 177);
             button4.Name = "button4";
             button4.Size = new Size(154, 43);
             button4.TabIndex = 4;
@@ -113,7 +114,7 @@
             button5.BackColor = Color.LightSteelBlue;
             button5.Font = new Font("Sans Serif Collection", 9F, FontStyle.Bold);
             button5.ForeColor = SystemColors.ControlText;
-            button5.Location = new Point(391, 226);
+            button5.Location = new Point(391, 373);
             button5.Name = "button5";
             button5.Size = new Size(154, 43);
             button5.TabIndex = 5;
@@ -126,7 +127,7 @@
             button6.BackColor = Color.LightSteelBlue;
             button6.Font = new Font("Sans Serif Collection", 9F, FontStyle.Bold);
             button6.ForeColor = SystemColors.ControlText;
-            button6.Location = new Point(391, 274);
+            button6.Location = new Point(391, 324);
             button6.Name = "button6";
             button6.Size = new Size(154, 43);
             button6.TabIndex = 6;
@@ -139,7 +140,7 @@
             button7.BackColor = Color.LightSteelBlue;
             button7.Font = new Font("Sans Serif Collection", 9F, FontStyle.Bold);
             button7.ForeColor = SystemColors.ControlText;
-            button7.Location = new Point(391, 322);
+            button7.Location = new Point(391, 128);
             button7.Name = "button7";
             button7.Size = new Size(154, 43);
             button7.TabIndex = 7;
@@ -152,7 +153,7 @@
             button8.BackColor = Color.LightSteelBlue;
             button8.Font = new Font("Sans Serif Collection", 9F, FontStyle.Bold);
             button8.ForeColor = SystemColors.ControlText;
-            button8.Location = new Point(391, 371);
+            button8.Location = new Point(391, 275);
             button8.Name = "button8";
             button8.Size = new Size(154, 43);
             button8.TabIndex = 8;
@@ -165,7 +166,7 @@
             button9.BackColor = Color.LightSteelBlue;
             button9.Font = new Font("Sans Serif Collection", 9F, FontStyle.Bold);
             button9.ForeColor = SystemColors.ControlText;
-            button9.Location = new Point(565, 34);
+            button9.Location = new Point(565, 12);
             button9.Name = "button9";
             button9.Size = new Size(165, 43);
             button9.TabIndex = 9;
@@ -178,7 +179,7 @@
             button10.BackColor = Color.LightSteelBlue;
             button10.Font = new Font("Sans Serif Collection", 9F, FontStyle.Bold);
             button10.ForeColor = SystemColors.ControlText;
-            button10.Location = new Point(565, 131);
+            button10.Location = new Point(565, 110);
             button10.Name = "button10";
             button10.Size = new Size(165, 43);
             button10.TabIndex = 10;
@@ -191,7 +192,7 @@
             button11.BackColor = Color.LightSteelBlue;
             button11.Font = new Font("Sans Serif Collection", 9F, FontStyle.Bold);
             button11.ForeColor = SystemColors.ControlText;
-            button11.Location = new Point(565, 178);
+            button11.Location = new Point(565, 159);
             button11.Name = "button11";
             button11.Size = new Size(165, 43);
             button11.TabIndex = 11;
@@ -204,7 +205,7 @@
             button12.BackColor = Color.LightSteelBlue;
             button12.Font = new Font("Sans Serif Collection", 9F, FontStyle.Bold);
             button12.ForeColor = SystemColors.ControlText;
-            button12.Location = new Point(565, 227);
+            button12.Location = new Point(565, 208);
             button12.Name = "button12";
             button12.Size = new Size(165, 43);
             button12.TabIndex = 12;
@@ -217,7 +218,7 @@
             button13.BackColor = Color.LightSteelBlue;
             button13.Font = new Font("Sans Serif Collection", 9F, FontStyle.Bold);
             button13.ForeColor = SystemColors.ControlText;
-            button13.Location = new Point(565, 82);
+            button13.Location = new Point(565, 61);
             button13.Name = "button13";
             button13.Size = new Size(165, 43);
             button13.TabIndex = 13;
@@ -230,7 +231,7 @@
             button14.BackColor = Color.LightSteelBlue;
             button14.Font = new Font("Sans Serif Collection", 9F, FontStyle.Bold);
             button14.ForeColor = SystemColors.ControlText;
-            button14.Location = new Point(565, 274);
+            button14.Location = new Point(565, 257);
             button14.Name = "button14";
             button14.Size = new Size(165, 43);
             button14.TabIndex = 14;
@@ -243,7 +244,7 @@
             button15.BackColor = Color.LightSteelBlue;
             button15.Font = new Font("Sans Serif Collection", 9F, FontStyle.Bold);
             button15.ForeColor = SystemColors.ControlText;
-            button15.Location = new Point(565, 323);
+            button15.Location = new Point(565, 306);
             button15.Name = "button15";
             button15.Size = new Size(165, 43);
             button15.TabIndex = 15;
@@ -256,13 +257,26 @@
             button16.BackColor = Color.LightSteelBlue;
             button16.Font = new Font("Sans Serif Collection", 9F, FontStyle.Bold);
             button16.ForeColor = SystemColors.ControlText;
-            button16.Location = new Point(565, 371);
+            button16.Location = new Point(565, 355);
             button16.Name = "button16";
             button16.Size = new Size(165, 43);
             button16.TabIndex = 16;
             button16.Text = "Update Ticket";
             button16.UseVisualStyleBackColor = false;
             button16.Click += button16_Click;
+            // 
+            // button17
+            // 
+            button17.BackColor = Color.LightSteelBlue;
+            button17.Font = new Font("Sans Serif Collection", 7.799999F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            button17.ForeColor = Color.Black;
+            button17.Location = new Point(703, 404);
+            button17.Name = "button17";
+            button17.Size = new Size(85, 36);
+            button17.TabIndex = 20;
+            button17.Text = "Log Out";
+            button17.UseVisualStyleBackColor = false;
+            button17.Click += button17_Click;
             // 
             // EmployeeForm
             // 
@@ -271,6 +285,7 @@
             BackgroundImage = Properties.Resources.employee;
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(800, 451);
+            Controls.Add(button17);
             Controls.Add(button16);
             Controls.Add(button15);
             Controls.Add(button14);
@@ -313,5 +328,6 @@
         private Button button14;
         private Button button15;
         private Button button16;
+        private Button button17;
     }
 }
