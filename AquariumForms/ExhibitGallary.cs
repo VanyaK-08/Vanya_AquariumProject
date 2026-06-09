@@ -39,6 +39,12 @@ namespace AquariumForms
 
             ExhibitController exhibitController = new ExhibitController();
             var exhibits = await exhibitController.GetAllExhibits();
+            if (exhibits == null || exhibits.Count == 0)
+            {
+                MessageBox.Show("There's currently no working exhibits! :(");
+                DialogResult = DialogResult.OK;
+                return;
+            }
 
             foreach (var exhibit in exhibits)
             {

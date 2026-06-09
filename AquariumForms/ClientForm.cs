@@ -32,7 +32,7 @@ namespace AquariumForms
             var checkTickets = await controller.GetAllTickets();
             if (checkTickets.Count == 0)
             {
-                MessageBox.Show("No tickets available for booking at the moment.");
+                MessageBox.Show("No tickets available for booking at the moment.\nPlease wait until tickets are released by an employee.");
                 this.Show();
                 return;
             }
