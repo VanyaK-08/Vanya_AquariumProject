@@ -13,11 +13,20 @@ namespace TestControllers.Tests
         {
             AquariumContext context = TestDBStuff.CreateContext();
 
+            context.Exhibits.Add(new Exhibit
+            {
+                Id = 1,
+                Title = "Exhibit1",
+                Description = "Description1"
+            });
+
             context.Tanks.Add(new Tank
             {
                 Id = 1,
                 Name = "Tank1",
-                CapacityLiters = 1000
+                CapacityLiters = 1000,
+                WaterTemperature = 25,
+                ExhibitId = 1
             });
 
             context.SaveChanges();
@@ -244,6 +253,28 @@ namespace TestControllers.Tests
             addedAnimal2.Name = "Nemo";
             addedAnimal2.Species = "Clownfish";
             Assert.ThrowsAsync<ArgumentException>(async () => await controller.UpdateAnimal(addedAnimal2));
+        }
+        [Test]
+        public async Task GetAllAnimals_ReturnsAllAnimals()
+        {
+            Animal animal1 = new Animal
+            {
+                Name = "Nemo",
+                Species = "Clownfish",
+                ArrivalDate = DateTime.Parse("2026-01-01"),
+                TankId = 1
+            };
+            await controller.AddAnimal(animal1);
+            Animal animal2 = new Animal
+            {
+                Name = "Dory",
+                Species = "Blue Tang",
+                ArrivalDate = DateTime.Parse("2026-01-01"),
+                TankId = 1
+            };
+            await controller.AddAnimal(animal2);
+            var animals = await controller.GetAllAnimals();
+            Assert.AreEqual(2, animals.Count);
         }
     }
 }

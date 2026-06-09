@@ -31,10 +31,6 @@ namespace AquariumController
             {
                 throw new ArgumentException("Booking with the specified ID does not exist.");
             }
-            if (checkBooking == null)
-            {
-                throw new ArgumentException("Booking with the specified ID does not exist.");
-            }
             ticket.ClientId = null;
             context.Tickets.Add(ticket);
             await context.SaveChangesAsync();
