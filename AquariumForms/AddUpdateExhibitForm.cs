@@ -26,7 +26,7 @@ namespace AquariumForms
             string title = textBox1.Text;
             string theme = textBox2.Text;
             string description = richTextBox1.Text;
-            if (string.IsNullOrEmpty(title) || string.IsNullOrWhiteSpace(title))
+            if (string.IsNullOrEmpty(textBox1.Text) || string.IsNullOrWhiteSpace(textBox1.Text))
             {
                 MessageBox.Show("Title cannot be empty!");
                 textBox1.Clear();
@@ -42,7 +42,7 @@ namespace AquariumForms
                 richTextBox1.Clear();
                 return;
             }
-            if (string.IsNullOrEmpty(theme) || string.IsNullOrWhiteSpace(theme))
+            if (string.IsNullOrEmpty(textBox2.Text) || string.IsNullOrWhiteSpace(textBox2.Text))
             {
                 MessageBox.Show("Theme cannot be empty!");
                 textBox1.Clear();
@@ -58,7 +58,7 @@ namespace AquariumForms
                 richTextBox1.Clear();
                 return;
             }
-            if (string.IsNullOrEmpty(description) || string.IsNullOrWhiteSpace(description))
+            if (string.IsNullOrEmpty(richTextBox1.Text) || string.IsNullOrWhiteSpace(richTextBox1.Text))
             {
                 MessageBox.Show("Description cannot be empty!");
                 textBox1.Clear();
@@ -72,8 +72,12 @@ namespace AquariumForms
             ex.Description = description;
             FileDialog fileDialog = new OpenFileDialog();
             fileDialog.ShowDialog();
+            if (fileDialog == null)
+            {
+                MessageBox.Show("Please select an image!");
+                return;
+            }
             ex.ImageUrl = fileDialog.FileName;
-
             if (editExhibit != null)
             {
                 ex.Id = editExhibit.Id;

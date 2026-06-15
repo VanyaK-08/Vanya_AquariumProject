@@ -30,9 +30,6 @@ namespace AquariumForms
         private void button1_Click(object sender, EventArgs e)
         {
 
-            string name = textBox1.Text;
-            int waterCpacity = int.Parse(textBox2.Text);
-            decimal temp = decimal.Parse(textBox3.Text);
             Exhibit exhibit = comboBox1.SelectedItem as Exhibit;
 
             if (exhibit == null)
@@ -45,7 +42,7 @@ namespace AquariumForms
                 return;
             }
             int exhibitID = exhibit.Id;
-            if (string.IsNullOrEmpty(name) || string.IsNullOrWhiteSpace(name))
+            if (string.IsNullOrEmpty(textBox1.Text) || string.IsNullOrWhiteSpace(textBox1.Text))
             {
                 MessageBox.Show("Name cannot be empty!");
                 textBox1.Clear();
@@ -54,6 +51,27 @@ namespace AquariumForms
                 comboBox1.SelectedIndex = -1;
                 return;
             }
+            if (string.IsNullOrEmpty(textBox2.Text) || string.IsNullOrWhiteSpace(textBox2.Text))
+            {
+                MessageBox.Show("Capacity cannot be empty!");
+                textBox1.Clear();
+                textBox2.Clear();
+                textBox3.Clear();
+                comboBox1.SelectedIndex = -1;
+                return;
+            }
+            if (string.IsNullOrEmpty(textBox3.Text) || string.IsNullOrWhiteSpace(textBox3.Text))
+            {
+                MessageBox.Show("Water temperature cannot be empty!");
+                textBox1.Clear();
+                textBox2.Clear();
+                textBox3.Clear();
+                comboBox1.SelectedIndex = -1;
+                return;
+            }
+            string name = textBox1.Text;
+            int waterCpacity = int.Parse(textBox2.Text);
+            decimal temp = decimal.Parse(textBox3.Text);
             if (name.Any(char.IsDigit))
             {
                 MessageBox.Show("Name cannot contain numbers!");

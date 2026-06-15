@@ -52,7 +52,7 @@ namespace AquariumForms
             }
             if (visitDate < DateTime.Now)
             {
-                MessageBox.Show("Visit date cannot be in the past.");
+                MessageBox.Show("Visit date cannot be in the past or current.");
                 numericUpDown1.Value = 10;
                 dateTimePicker1.Value = DateTime.Now;
                 comboBox1.SelectedIndex = -1;

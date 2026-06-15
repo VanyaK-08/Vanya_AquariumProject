@@ -37,7 +37,7 @@ namespace AquariumForms
         {
             if (dateTimePicker1.Value < DateTime.Now)
             {
-                MessageBox.Show("Booking date cannot be in the past.");
+                MessageBox.Show("Booking date cannot be in the past or current.");
                 return;
             }
 
