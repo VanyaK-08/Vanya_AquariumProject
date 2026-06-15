@@ -1,14 +1,5 @@
-﻿using AquariumData.Entities;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.TrackBar;
+﻿using AquariumData;
+using AquariumData.Entities;
 
 namespace AquariumForms
 {
@@ -24,7 +15,6 @@ namespace AquariumForms
             this.booking = selectedBooking;
         }
         public Booking booking { get; set; }
-
         private void button1_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.OK;
@@ -32,10 +22,24 @@ namespace AquariumForms
 
         private void EmployeetBookingsDetailsForm_Load(object sender, EventArgs e)
         {
-            List<Ticket> tickets = booking.Tickets.ToList();
-            richTextBox1.Text = $"Employee: {booking.Employee}\n" +
-                $"Booking date: {booking.BookingDate}\n" +
-                $"Ticket/s: {string.Join("; ", tickets)}";
+            List<Ticket> tickets = booking.Tickets.Where(t=>t.BookingId == booking.Id).ToList();
+            richTextBox1.Text = $"Booking date: {booking.BookingDate}";
+            if (tickets.Count > 0)
+            {
+                richTextBox1.Text += $"\nTickets:\n";
+                foreach (var ticket in tickets)
+                {
+                    richTextBox1.Text += $"Exhibit: {ticket.Exhibit}\n" +
+                        $"Exhibit description: {ticket.Exhibit.Description}\n" +
+                        $"Price: {ticket.Price}\n" +
+                        $"Employee: {ticket.Booking.Employee}\n" +
+                        $"Tank/s: {string.Join("; ", ticket.Exhibit.Tanks)}\n\n";
+                }
+            }
+            else
+            {
+                richTextBox1.Text += "\nNo tickets booked for this booking.";
+            }
         }
     }
 }
