@@ -26,13 +26,14 @@ namespace AquariumForms
             AquariumContext context = new AquariumContext();
             Userr user = new Userr();
 
-            user.Username = textBox1.Text;
-            user.Email = textBox2.Text;
-            user.Password = textBox3.Text;
-            user.Role = (Role)comboBox1.SelectedIndex;
             if (string.IsNullOrWhiteSpace(textBox1.Text) || string.IsNullOrWhiteSpace(textBox2.Text))
             {
                 MessageBox.Show("Enter all the information required!");
+                return;
+            }
+            if(string.IsNullOrEmpty(textBox2.Text) || string.IsNullOrWhiteSpace(textBox2.Text))
+            {
+                MessageBox.Show("Email cannot be empty!");
                 return;
             }
             if (textBox3.Text != textBox4.Text)
@@ -40,11 +41,25 @@ namespace AquariumForms
                 MessageBox.Show("Passwords aren't the same");
                 return;
             }
+            if (string.IsNullOrEmpty(textBox3.Text) || string.IsNullOrWhiteSpace(textBox3.Text))
+            {
+                MessageBox.Show("Password cannot be empty!");
+                return;
+            }
             if (context.Users.Any(x => x.Username == textBox1.Text))
             {
                 MessageBox.Show("Username already exists!");
                 return;
             }
+            if(comboBox1.SelectedIndex == -1)
+            {
+                MessageBox.Show("Please select a role!");
+                return;
+            }
+            user.Username = textBox1.Text;
+            user.Email = textBox2.Text;
+            user.Password = textBox3.Text;
+            user.Role = (Role)comboBox1.SelectedIndex;
 
             await context.Users.AddAsync(user);
             await context.SaveChangesAsync();
