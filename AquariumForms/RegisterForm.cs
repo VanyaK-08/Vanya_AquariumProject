@@ -1,16 +1,6 @@
 ﻿using AquariumData;
 using AquariumData.Entities;
 using AquariumData.Enums;
-using Microsoft.VisualBasic.ApplicationServices;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace AquariumForms
 {
@@ -31,7 +21,7 @@ namespace AquariumForms
                 MessageBox.Show("Enter all the information required!");
                 return;
             }
-            if(string.IsNullOrEmpty(textBox2.Text) || string.IsNullOrWhiteSpace(textBox2.Text))
+            if (string.IsNullOrEmpty(textBox2.Text) || string.IsNullOrWhiteSpace(textBox2.Text))
             {
                 MessageBox.Show("Email cannot be empty!");
                 return;
@@ -51,7 +41,12 @@ namespace AquariumForms
                 MessageBox.Show("Username already exists!");
                 return;
             }
-            if(comboBox1.SelectedIndex == -1)
+            if (context.Users.Any(x => x.Email == textBox2.Text))
+            {
+                MessageBox.Show("Email already exists!");
+                return;
+            }
+            if (comboBox1.SelectedIndex == -1)
             {
                 MessageBox.Show("Please select a role!");
                 return;
