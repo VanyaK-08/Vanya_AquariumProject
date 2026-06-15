@@ -1,4 +1,5 @@
 ﻿using AquariumController;
+using AquariumData;
 using AquariumData.Entities;
 using System.Threading.Tasks;
 
@@ -10,6 +11,7 @@ namespace AquariumForms
         {
             InitializeComponent();
         }
+        AquariumContext context = new AquariumContext();
         public EmployeeForm(Userr curEmployee)
         {
             InitializeComponent();
@@ -39,7 +41,11 @@ namespace AquariumForms
 
         private async void button2_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            if(context.Tanks.Count() <= 0)
+            {
+                MessageBox.Show("Please add a tank before adding an animal.");
+                return;
+            }
             AddUpdateAnimalForm animalForm = new AddUpdateAnimalForm();
             animalForm.ShowDialog();
             if (animalForm.DialogResult == DialogResult.OK)
@@ -112,6 +118,11 @@ namespace AquariumForms
 
         private async void button6_Click(object sender, EventArgs e)
         {
+            if (context.Exhibits.Count() <= 0)
+            {
+                MessageBox.Show("Please add an exhibit before adding a tank.");
+                return;
+            }
             this.Hide();
             AddUpdateTankForm tankForm = new AddUpdateTankForm();
             tankForm.ShowDialog();
@@ -326,6 +337,11 @@ namespace AquariumForms
 
         private async void button14_Click(object sender, EventArgs e)
         {
+            if (context.Bookings.Count() <= 0)
+            {
+                MessageBox.Show("Please add a booking before adding a ticket.");
+                return;
+            }
             this.Hide();
             try
             {
