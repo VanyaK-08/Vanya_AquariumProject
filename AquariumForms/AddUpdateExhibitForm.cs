@@ -72,7 +72,7 @@ namespace AquariumForms
             ex.Description = description;
             FileDialog fileDialog = new OpenFileDialog();
             fileDialog.ShowDialog();
-            if (fileDialog == null)
+            if (string.IsNullOrEmpty(fileDialog.FileName) || string.IsNullOrWhiteSpace(fileDialog.FileName))
             {
                 MessageBox.Show("Please select an image!");
                 return;
