@@ -39,8 +39,6 @@
             button1 = new Button();
             label5 = new Label();
             textBox4 = new TextBox();
-            label1 = new Label();
-            comboBox1 = new ComboBox();
             SuspendLayout();
             // 
             // label2
@@ -61,7 +59,7 @@
             label3.BackColor = Color.Transparent;
             label3.Font = new Font("Sans Serif Collection", 10.1999989F, FontStyle.Bold, GraphicsUnit.Point, 204);
             label3.ForeColor = SystemColors.ButtonHighlight;
-            label3.Location = new Point(186, 133);
+            label3.Location = new Point(186, 143);
             label3.Name = "label3";
             label3.Size = new Size(73, 58);
             label3.TabIndex = 6;
@@ -73,7 +71,7 @@
             label4.BackColor = Color.Transparent;
             label4.Font = new Font("Sans Serif Collection", 10.1999989F, FontStyle.Bold, GraphicsUnit.Point, 204);
             label4.ForeColor = SystemColors.ButtonHighlight;
-            label4.Location = new Point(150, 183);
+            label4.Location = new Point(142, 205);
             label4.Name = "label4";
             label4.Size = new Size(109, 58);
             label4.TabIndex = 7;
@@ -81,21 +79,21 @@
             // 
             // textBox1
             // 
-            textBox1.Location = new Point(265, 94);
+            textBox1.Location = new Point(280, 94);
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(199, 27);
             textBox1.TabIndex = 9;
             // 
             // textBox2
             // 
-            textBox2.Location = new Point(265, 142);
+            textBox2.Location = new Point(280, 152);
             textBox2.Name = "textBox2";
             textBox2.Size = new Size(199, 27);
             textBox2.TabIndex = 10;
             // 
             // textBox3
             // 
-            textBox3.Location = new Point(265, 192);
+            textBox3.Location = new Point(280, 214);
             textBox3.Name = "textBox3";
             textBox3.Size = new Size(199, 27);
             textBox3.TabIndex = 11;
@@ -107,7 +105,7 @@
             button2.FlatStyle = FlatStyle.Flat;
             button2.Font = new Font("Sans Serif Collection", 10.1999989F, FontStyle.Bold);
             button2.ForeColor = SystemColors.ControlText;
-            button2.Location = new Point(519, 94);
+            button2.Location = new Point(519, 88);
             button2.Name = "button2";
             button2.Size = new Size(117, 52);
             button2.TabIndex = 13;
@@ -121,7 +119,7 @@
             button1.FlatStyle = FlatStyle.Flat;
             button1.Font = new Font("Sans Serif Collection", 10.1999989F, FontStyle.Bold);
             button1.ForeColor = SystemColors.ControlText;
-            button1.Location = new Point(519, 279);
+            button1.Location = new Point(519, 256);
             button1.Name = "button1";
             button1.Size = new Size(117, 52);
             button1.TabIndex = 14;
@@ -135,7 +133,7 @@
             label5.BackColor = Color.Transparent;
             label5.Font = new Font("Sans Serif Collection", 10.1999989F, FontStyle.Bold, GraphicsUnit.Point, 204);
             label5.ForeColor = SystemColors.ButtonHighlight;
-            label5.Location = new Point(76, 238);
+            label5.Location = new Point(76, 272);
             label5.Name = "label5";
             label5.Size = new Size(183, 58);
             label5.TabIndex = 15;
@@ -143,31 +141,11 @@
             // 
             // textBox4
             // 
-            textBox4.Location = new Point(265, 247);
+            textBox4.Location = new Point(280, 281);
             textBox4.Name = "textBox4";
             textBox4.Size = new Size(199, 27);
             textBox4.TabIndex = 16;
             textBox4.UseSystemPasswordChar = true;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.BackColor = Color.Transparent;
-            label1.Font = new Font("Sans Serif Collection", 10.1999989F, FontStyle.Bold);
-            label1.ForeColor = SystemColors.ButtonHighlight;
-            label1.Location = new Point(186, 294);
-            label1.Name = "label1";
-            label1.Size = new Size(64, 58);
-            label1.TabIndex = 17;
-            label1.Text = "Role";
-            // 
-            // comboBox1
-            // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(265, 303);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(199, 28);
-            comboBox1.TabIndex = 18;
             // 
             // RegisterForm
             // 
@@ -176,8 +154,6 @@
             BackgroundImage = Properties.Resources.register;
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(800, 450);
-            Controls.Add(comboBox1);
-            Controls.Add(label1);
             Controls.Add(textBox4);
             Controls.Add(label5);
             Controls.Add(button1);
@@ -208,7 +184,5 @@
         private Button button1;
         private Label label5;
         private TextBox textBox4;
-        private Label label1;
-        private ComboBox comboBox1;
     }
 }

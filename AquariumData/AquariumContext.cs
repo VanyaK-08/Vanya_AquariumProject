@@ -1,4 +1,5 @@
 ﻿using AquariumData.Entities;
+using AquariumData.Enums;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
@@ -21,15 +22,16 @@ namespace AquariumData
         public DbSet<Booking> Bookings { get; set; }
         public DbSet<Ticket> Tickets { get; set; }
         public DbSet<Userr> Users { get; set; }
+        public DbSet<ClientTicket> ClientsTickets { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
-            var builder = new ConfigurationBuilder();
-            builder.AddJsonFile("appsettings.json");
-            var config = builder.Build();
-            string connectionstring = config.GetConnectionString("DefaultConnection");
-            optionsBuilder.UseSqlServer(connectionstring);
+                var builder = new ConfigurationBuilder();
+                builder.AddJsonFile("appsettings.json");
+                var config = builder.Build();
+                string connectionstring = config.GetConnectionString("DefaultConnection");
+                optionsBuilder.UseSqlServer(connectionstring);
             }
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -56,6 +58,7 @@ namespace AquariumData
             modelBuilder.Entity<Userr>()
                 .Property(u => u.Role)
                 .HasConversion<string>();
+
 
             //tank
             modelBuilder.Entity<Tank>()
@@ -115,7 +118,7 @@ namespace AquariumData
                 .HasMaxLength(1000);
 
             modelBuilder.Entity<Exhibit>()
-                .Property(e=>e.ImageUrl)
+                .Property(e => e.ImageUrl)
                 .IsRequired();
 
             //booking
@@ -156,11 +159,54 @@ namespace AquariumData
                 .HasForeignKey(t => t.ExhibitId)
                 .OnDelete(DeleteBehavior.Cascade);
 
+            // client ticket
+            modelBuilder.Entity<ClientTicket>()
+                .HasKey(ct => ct.Id);
+
+            modelBuilder.Entity<ClientTicket>()
+                .HasOne(ct => ct.Ticket)
+                .WithMany(t => t.ClientTickets)
+                .HasForeignKey(ct => ct.TicketId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<ClientTicket>()
+                .HasOne(ct => ct.Client)
+                .WithMany(u => u.ClientTickets)
+                .HasForeignKey(ct => ct.ClientId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Userr>()
+                .HasIndex(u => u.Username)
+                .IsUnique();
+
+            modelBuilder.Entity<Userr>()
+                .HasIndex(u => u.Email)
+                .IsUnique();
+
+            modelBuilder.Entity<Tank>()
+                .ToTable(t => t.HasCheckConstraint("CK_Tank_CapacityLiters", "[CapacityLiters] > 0"));
+
             modelBuilder.Entity<Ticket>()
-                .HasOne(t => t.Client)
-                .WithMany(u => u.Tickets)
-                .HasForeignKey(t => t.ClientId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .ToTable(t => t.HasCheckConstraint("CK_Ticket_Price", "[Price] >= 0"));
+
+            modelBuilder.Entity<Userr>().HasData(
+    new Userr
+    {
+        Id = 1,
+        Username = "IvanIvanov06",
+        Email = "ivan.ivanov.06@gmail.com",
+        Password = "admin123",
+        Role = Role.Employee
+    },
+    new Userr
+    {
+        Id = 2,
+        Username = "MariaDimitrova03",
+        Email = "mari.dimi.03@gmail.com",
+        Password = "password123",
+        Role = Role.Employee
+    }
+);
         }
     }
 }

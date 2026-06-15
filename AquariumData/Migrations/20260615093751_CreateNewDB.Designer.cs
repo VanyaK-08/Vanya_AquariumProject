@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AquariumData.Migrations
 {
     [DbContext(typeof(AquariumContext))]
-    [Migration("20260526103454_CreateDB")]
-    partial class CreateDB
+    [Migration("20260615093751_CreateNewDB")]
+    partial class CreateNewDB
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -77,6 +77,29 @@ namespace AquariumData.Migrations
                     b.ToTable("Bookings");
                 });
 
+            modelBuilder.Entity("AquariumData.Entities.ClientTicket", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ClientId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TicketId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClientId");
+
+                    b.HasIndex("TicketId");
+
+                    b.ToTable("ClientsTickets");
+                });
+
             modelBuilder.Entity("AquariumData.Entities.Exhibit", b =>
                 {
                     b.Property<int>("Id")
@@ -135,7 +158,10 @@ namespace AquariumData.Migrations
 
                     b.HasIndex("ExhibitId");
 
-                    b.ToTable("Tanks");
+                    b.ToTable("Tanks", t =>
+                        {
+                            t.HasCheckConstraint("CK_Tank_CapacityLiters", "[CapacityLiters] > 0");
+                        });
                 });
 
             modelBuilder.Entity("AquariumData.Entities.Ticket", b =>
@@ -147,9 +173,6 @@ namespace AquariumData.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("BookingId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ClientId")
                         .HasColumnType("int");
 
                     b.Property<int>("ExhibitId")
@@ -165,14 +188,15 @@ namespace AquariumData.Migrations
 
                     b.HasIndex("BookingId");
 
-                    b.HasIndex("ClientId");
-
                     b.HasIndex("ExhibitId");
 
-                    b.ToTable("Tickets");
+                    b.ToTable("Tickets", t =>
+                        {
+                            t.HasCheckConstraint("CK_Ticket_Price", "[Price] >= 0");
+                        });
                 });
 
-            modelBuilder.Entity("AquariumData.Entities.User", b =>
+            modelBuilder.Entity("AquariumData.Entities.Userr", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -201,6 +225,12 @@ namespace AquariumData.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("Email")
+                        .IsUnique();
+
+                    b.HasIndex("Username")
+                        .IsUnique();
+
                     b.ToTable("Users");
                 });
 
@@ -217,13 +247,32 @@ namespace AquariumData.Migrations
 
             modelBuilder.Entity("AquariumData.Entities.Booking", b =>
                 {
-                    b.HasOne("AquariumData.Entities.User", "Employee")
+                    b.HasOne("AquariumData.Entities.Userr", "Employee")
                         .WithMany("EmployeeBookings")
                         .HasForeignKey("UserEmployeeId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Employee");
+                });
+
+            modelBuilder.Entity("AquariumData.Entities.ClientTicket", b =>
+                {
+                    b.HasOne("AquariumData.Entities.Userr", "Client")
+                        .WithMany("ClientTickets")
+                        .HasForeignKey("ClientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("AquariumData.Entities.Ticket", "Ticket")
+                        .WithMany("ClientTickets")
+                        .HasForeignKey("TicketId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Client");
+
+                    b.Navigation("Ticket");
                 });
 
             modelBuilder.Entity("AquariumData.Entities.Tank", b =>
@@ -245,11 +294,6 @@ namespace AquariumData.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("AquariumData.Entities.User", "Client")
-                        .WithMany("Tickets")
-                        .HasForeignKey("ClientId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
                     b.HasOne("AquariumData.Entities.Exhibit", "Exhibit")
                         .WithMany("Tickets")
                         .HasForeignKey("ExhibitId")
@@ -257,8 +301,6 @@ namespace AquariumData.Migrations
                         .IsRequired();
 
                     b.Navigation("Booking");
-
-                    b.Navigation("Client");
 
                     b.Navigation("Exhibit");
                 });
@@ -280,11 +322,16 @@ namespace AquariumData.Migrations
                     b.Navigation("Animals");
                 });
 
-            modelBuilder.Entity("AquariumData.Entities.User", b =>
+            modelBuilder.Entity("AquariumData.Entities.Ticket", b =>
                 {
-                    b.Navigation("EmployeeBookings");
+                    b.Navigation("ClientTickets");
+                });
 
-                    b.Navigation("Tickets");
+            modelBuilder.Entity("AquariumData.Entities.Userr", b =>
+                {
+                    b.Navigation("ClientTickets");
+
+                    b.Navigation("EmployeeBookings");
                 });
 #pragma warning restore 612, 618
         }

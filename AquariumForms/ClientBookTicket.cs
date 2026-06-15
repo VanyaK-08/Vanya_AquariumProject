@@ -10,10 +10,10 @@ namespace AquariumForms
             InitializeComponent();
             
             comboBox1.DisplayMember = "ToString";
-            this.currentClient1 = currentClient;
+            this.CurrentClient1 = currentClient;
         }
         TicketController ticketController = new TicketController();
-        private Userr currentClient1 { get; set; }
+        private Userr CurrentClient1 { get; set; }
         public Ticket Ticket = null;
         private void button1_Click(object sender, EventArgs e)
         {

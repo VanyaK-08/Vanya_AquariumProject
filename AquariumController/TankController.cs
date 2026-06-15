@@ -1,11 +1,6 @@
 ﻿using AquariumData;
 using AquariumData.Entities;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AquariumController
 {
@@ -22,7 +17,7 @@ namespace AquariumController
         }
         public async Task<List<Tank>> GetAllTanks()
         {
-            return await context.Tanks.Include(t=>t.Exhibit).ToListAsync();
+            return await context.Tanks.Include(t => t.Exhibit).ToListAsync();
         }
 
         public async Task AddTank(Tank tank)
@@ -38,6 +33,12 @@ namespace AquariumController
             if (context.Tanks.Any(t => t.Name == tank.Name))
             {
                 throw new ArgumentException("A tank with the same name already exists.");
+            }
+            var exhibitExists = await context.Exhibits.AnyAsync(e => e.Id == tank.ExhibitId);
+
+            if (!exhibitExists)
+            {
+                throw new ArgumentException("Exhibit does not exist.");
             }
             context.Tanks.Add(tank);
             await context.SaveChangesAsync();
@@ -62,9 +63,32 @@ namespace AquariumController
             {
                 throw new ArgumentException("Another tank with the same name already exists.");
             }
+            existingTank.ExhibitId = tank.ExhibitId;
             existingTank.Name = tank.Name;
             existingTank.CapacityLiters = tank.CapacityLiters;
             existingTank.WaterTemperature = tank.WaterTemperature;
+            await context.SaveChangesAsync();
+        }
+
+        public async Task DeleteTank(int id)
+        {
+            var tank = await context.Tanks
+                .Include(t => t.Animals)
+                .FirstOrDefaultAsync(t => t.Id == id);
+
+            if (tank == null)
+            {
+                throw new ArgumentException("Tank not found.");
+            }
+
+            if (tank.Animals.Any())
+            {
+                throw new InvalidOperationException(
+                    "Cannot delete tank that contains animals.");
+            }
+
+            context.Tanks.Remove(tank);
+
             await context.SaveChangesAsync();
         }
     }

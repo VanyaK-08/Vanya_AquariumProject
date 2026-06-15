@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace AquariumData.Entities
+﻿namespace AquariumData.Entities
 {
     public class Ticket
     {
@@ -21,14 +15,11 @@ namespace AquariumData.Entities
         public int ExhibitId { get; set; }
 
         public Exhibit? Exhibit { get; set; }
-
-        public int? ClientId { get; set; }
-
-        public Userr? Client { get; set; }
+        public ICollection<ClientTicket> ClientTickets { get; set; } = new List<ClientTicket>();
 
         public override string ToString()
-            {
-                return $"{Exhibit.Title} - {Price:f2}";
+        {
+            return $"{Exhibit?.Title} - {Price:F2}";
         }
     }
 }

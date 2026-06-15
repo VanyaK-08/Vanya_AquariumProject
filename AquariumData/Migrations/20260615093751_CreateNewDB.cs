@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace AquariumData.Migrations
 {
     /// <inheritdoc />
-    public partial class CreateDB : Migration
+    public partial class CreateNewDB : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -57,6 +57,7 @@ namespace AquariumData.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Tanks", x => x.Id);
+                    table.CheckConstraint("CK_Tank_CapacityLiters", "[CapacityLiters] > 0");
                     table.ForeignKey(
                         name: "FK_Tanks_Exhibits_ExhibitId",
                         column: x => x.ExhibitId,
@@ -116,12 +117,12 @@ namespace AquariumData.Migrations
                     Price = table.Column<decimal>(type: "decimal(10,2)", nullable: false),
                     VisitDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     BookingId = table.Column<int>(type: "int", nullable: false),
-                    ExhibitId = table.Column<int>(type: "int", nullable: false),
-                    ClientId = table.Column<int>(type: "int", nullable: true)
+                    ExhibitId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Tickets", x => x.Id);
+                    table.CheckConstraint("CK_Ticket_Price", "[Price] >= 0");
                     table.ForeignKey(
                         name: "FK_Tickets_Bookings_BookingId",
                         column: x => x.BookingId,
@@ -134,12 +135,32 @@ namespace AquariumData.Migrations
                         principalTable: "Exhibits",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ClientsTickets",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    TicketId = table.Column<int>(type: "int", nullable: false),
+                    ClientId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ClientsTickets", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Tickets_Users_ClientId",
+                        name: "FK_ClientsTickets_Tickets_TicketId",
+                        column: x => x.TicketId,
+                        principalTable: "Tickets",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ClientsTickets_Users_ClientId",
                         column: x => x.ClientId,
                         principalTable: "Users",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -153,6 +174,16 @@ namespace AquariumData.Migrations
                 column: "UserEmployeeId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_ClientsTickets_ClientId",
+                table: "ClientsTickets",
+                column: "ClientId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ClientsTickets_TicketId",
+                table: "ClientsTickets",
+                column: "TicketId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Tanks_ExhibitId",
                 table: "Tanks",
                 column: "ExhibitId");
@@ -163,14 +194,21 @@ namespace AquariumData.Migrations
                 column: "BookingId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Tickets_ClientId",
-                table: "Tickets",
-                column: "ClientId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Tickets_ExhibitId",
                 table: "Tickets",
                 column: "ExhibitId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Users_Email",
+                table: "Users",
+                column: "Email",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Users_Username",
+                table: "Users",
+                column: "Username",
+                unique: true);
         }
 
         /// <inheritdoc />
@@ -180,10 +218,13 @@ namespace AquariumData.Migrations
                 name: "Animals");
 
             migrationBuilder.DropTable(
-                name: "Tickets");
+                name: "ClientsTickets");
 
             migrationBuilder.DropTable(
                 name: "Tanks");
+
+            migrationBuilder.DropTable(
+                name: "Tickets");
 
             migrationBuilder.DropTable(
                 name: "Bookings");

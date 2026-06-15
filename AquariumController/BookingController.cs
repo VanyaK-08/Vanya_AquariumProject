@@ -53,9 +53,22 @@ namespace AquariumController
             {
                 throw new ArgumentException("Booking date cannot be in the past.");
             }
+            existingBooking.Id = booking.Id;
             existingBooking.BookingDate = booking.BookingDate;
             existingBooking.UserEmployeeId = booking.UserEmployeeId;
             existingBooking.Tickets = booking.Tickets;
+            await context.SaveChangesAsync();
+        }
+
+        public async Task DeleteBooking(int id)
+        {
+            var booking = await context.Bookings.FindAsync(id);
+
+            if (booking == null)
+                throw new ArgumentException("Booking not found.");
+
+            context.Bookings.Remove(booking);
+
             await context.SaveChangesAsync();
         }
     }

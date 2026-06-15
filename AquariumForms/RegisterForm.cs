@@ -46,15 +46,11 @@ namespace AquariumForms
                 MessageBox.Show("Email already exists!");
                 return;
             }
-            if (comboBox1.SelectedIndex == -1)
-            {
-                MessageBox.Show("Please select a role!");
-                return;
-            }
+            
             user.Username = textBox1.Text;
             user.Email = textBox2.Text;
             user.Password = textBox3.Text;
-            user.Role = (Role)comboBox1.SelectedIndex;
+            user.Role = Role.Client;
 
             await context.Users.AddAsync(user);
             await context.SaveChangesAsync();
@@ -63,7 +59,7 @@ namespace AquariumForms
 
         private void RegisterForm_Load(object sender, EventArgs e)
         {
-            comboBox1.DataSource = Enum.GetValues(typeof(Role));
+            
         }
 
         private void button1_Click(object sender, EventArgs e)

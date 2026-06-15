@@ -67,10 +67,25 @@ namespace AquariumController
             {
                 throw new ArgumentException("Another animal with the same name, species, and tank already exists.");
             }
+            existingAnimal.Id = animal.Id;
             existingAnimal.Name = animal.Name;
             existingAnimal.Species = animal.Species;
             existingAnimal.ArrivalDate = animal.ArrivalDate;
             existingAnimal.TankId = animal.TankId;
+            await context.SaveChangesAsync();
+        }
+
+        public async Task DeleteAnimal(int id)
+        {
+            var animal = await context.Animals.FindAsync(id);
+
+            if (animal == null)
+            {
+                throw new ArgumentException("Animal not found.");
+            }
+
+            context.Animals.Remove(animal);
+
             await context.SaveChangesAsync();
         }
     }

@@ -21,6 +21,6 @@ namespace AquariumData.Entities
 
         public ICollection<Booking> EmployeeBookings { get; set; } = new List<Booking>();
 
-        public ICollection<Ticket> Tickets { get; set; } = new List<Ticket>();
+        public ICollection<ClientTicket> ClientTickets { get; set; } = new List<ClientTicket>();
     }
 }

@@ -39,7 +39,7 @@
             // 
             // listBox1
             // 
-            listBox1.BackColor = SystemColors.Window;
+            listBox1.BackColor = Color.SkyBlue;
             listBox1.FormattingEnabled = true;
             listBox1.Location = new Point(28, 32);
             listBox1.Name = "listBox1";

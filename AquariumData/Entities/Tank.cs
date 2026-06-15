@@ -24,7 +24,7 @@ namespace AquariumData.Entities
 
         public override string ToString()
         {
-            return $"{Name}, {Exhibit.Title}";
+            return $"{Name}, {Exhibit?.Title}";
         }
     }
 }

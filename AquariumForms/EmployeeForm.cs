@@ -1,7 +1,6 @@
 ﻿using AquariumController;
 using AquariumData;
 using AquariumData.Entities;
-using System.Threading.Tasks;
 
 namespace AquariumForms
 {
@@ -41,7 +40,7 @@ namespace AquariumForms
 
         private async void button2_Click(object sender, EventArgs e)
         {
-            if(context.Tanks.Count() <= 0)
+            if (context.Tanks.Count() <= 0)
             {
                 MessageBox.Show("Please add a tank before adding an animal.");
                 return;
@@ -342,6 +341,11 @@ namespace AquariumForms
                 MessageBox.Show("Please add a booking before adding a ticket.");
                 return;
             }
+            if (context.Exhibits.Count() <= 0)
+            {
+                MessageBox.Show("Please add an exhibit before adding a ticket.");
+                return;
+            }
             this.Hide();
             try
             {
@@ -426,6 +430,126 @@ namespace AquariumForms
         private void button17_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private async void button18_Click(object sender, EventArgs e)
+        {
+            if (listBox1.SelectedIndex != -1)
+            {
+                DialogResult result = MessageBox.Show(
+                    "Are you sure you want to delete this animal?",
+                    "Confirmation", MessageBoxButtons.YesNo);
+                if (result == DialogResult.Yes)
+                {
+                    AnimalController controller = new AnimalController();
+                    Animal animal = listBox1.SelectedItem as Animal;
+                    int index = listBox1.SelectedIndex;
+                    try
+                    {
+                        await controller.DeleteAnimal(animal.Id);
+                        listBox1.Items.RemoveAt(index);
+                        MessageBox.Show("Animal deleted successfully.");
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"{ex.Message}");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Please select an animal to delete.");
+                }
+            }
+        }
+
+        private void button19_Click(object sender, EventArgs e)
+        {
+            if (listBox1.SelectedIndex != -1)
+            {
+                DialogResult result = MessageBox.Show(
+                    "Are you sure you want to delete this tank?",
+                    "Confirmation", MessageBoxButtons.YesNo);
+                if (result == DialogResult.Yes)
+                {
+                    TankController controller = new TankController();
+                    Tank tank = listBox1.SelectedItem as Tank;
+                    int index = listBox1.SelectedIndex;
+                    try
+                    {
+                        controller.DeleteTank(tank.Id);
+                        listBox1.Items.RemoveAt(index);
+                        MessageBox.Show("Tank deleted successfully!");
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"{ex.Message}");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Please select a tank to delete.");
+                }
+            }
+        }
+
+        private void button20_Click(object sender, EventArgs e)
+        {
+            if (listBox1.SelectedIndex != -1)
+            {
+                DialogResult result = MessageBox.Show(
+                    "Are you sure you want to delete this booking?",
+                    "Confirmation", MessageBoxButtons.YesNo);
+                if (result == DialogResult.Yes)
+                {
+                    BookingController controller = new BookingController();
+                    Booking booking = listBox1.SelectedItem as Booking;
+                    int index = listBox1.SelectedIndex;
+                    try
+                    {
+                        controller.DeleteBooking(booking.Id);
+                        listBox1.Items.RemoveAt(index);
+                        MessageBox.Show("Booking deleted successfully!");
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"{ex.Message}");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Please select a booking to delete.");
+                }
+            }
+        }
+
+        private void button21_Click(object sender, EventArgs e)
+        {
+            if (listBox1.SelectedIndex != -1)
+            {
+                DialogResult result = MessageBox.Show(
+                    "Are you sure you want to delete this ticket?",
+                    "Confirmation", MessageBoxButtons.YesNo);
+                if (result == DialogResult.Yes)
+                {
+                    TicketController controller = new TicketController();
+                    Ticket ticket = listBox1.SelectedItem as Ticket;
+                    int index = listBox1.SelectedIndex;
+                    try
+                    {
+                        controller.DeleteTicket(ticket.Id);
+                        listBox1.Items.RemoveAt(index);
+                        MessageBox.Show("Ticket deleted successfully!");
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"{ex.Message}");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Please select a ticket to delete.");
+                }
+            }
         }
     }
 }

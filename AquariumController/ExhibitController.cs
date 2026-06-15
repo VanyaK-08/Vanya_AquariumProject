@@ -49,8 +49,11 @@ namespace AquariumController
             {
                 throw new ArgumentException("Another exhibit with the same title already exists.");
             }
+            existingExhibit.Id = exhibit.Id;
             existingExhibit.Title = exhibit.Title;
+            existingExhibit.Theme = exhibit.Theme;
             existingExhibit.Description = exhibit.Description;
+            existingExhibit.ImageUrl = exhibit.ImageUrl;
             await context.SaveChangesAsync();
         }
     }

@@ -28,8 +28,9 @@ namespace AquariumForms
         private async void button2_Click(object sender, EventArgs e)
         {
             this.Hide();
-            TicketController controller = new TicketController();
-            var checkTickets = await controller.GetAllTickets();
+            ClientTicketController controller = new ClientTicketController();
+            TicketController ticketController = new TicketController();
+            var checkTickets = await ticketController.GetAllTickets();
             if (checkTickets.Count == 0)
             {
                 MessageBox.Show("No tickets available for booking at the moment.\nPlease wait until tickets are released by an employee.");
@@ -42,7 +43,7 @@ namespace AquariumForms
             {
                 try
                 {
-                    await controller.BookTicketClient(bookTicket.Ticket, currentClient1);
+                    await controller.BookTicket(currentClient1.Id, bookTicket.Ticket.Id);
                 }
                 catch (Exception ex)
                 {
@@ -54,7 +55,6 @@ namespace AquariumForms
 
         private async void button1_Click(object sender, EventArgs e)
         {
-            this.Hide();
             if (listBox1.SelectedIndex != -1)
             {
                 DialogResult result = MessageBox.Show(
@@ -65,7 +65,8 @@ namespace AquariumForms
                     int index = listBox1.SelectedIndex;
                     Ticket ticket = (Ticket)listBox1.Items[index];
                     TicketController controller = new TicketController();
-                    await controller.UnbookTicketClient(ticket);
+                    ClientTicketController ticketController = new ClientTicketController();
+                    await ticketController.UnbookTicket(currentClient1.Id, ticket.Id);
                     listBox1.Items.RemoveAt(index);
                     MessageBox.Show("Ticket unbooked successfully.");
                 }
@@ -74,7 +75,6 @@ namespace AquariumForms
             {
                 MessageBox.Show("Please select a ticket to unbook.");
             }
-            this.Show();
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -97,11 +97,7 @@ namespace AquariumForms
 
         private async void ClientForm_Load(object sender, EventArgs e)
         {
-            List<Ticket> tickets = await ticketController.GetTicketsForClient(currentClient1);
-            foreach (var item in tickets)
-            {
-                listBox1.Items.Add(item);
-            }
+            
         }
 
         private void button5_Click(object sender, EventArgs e)
